@@ -1,5 +1,5 @@
 <template>
-    <div class="cursor-pointer flex flex-col text-center items-center min-h-period bg-sky-100 rounded-lg shadow-lg p-2 focus:border-2 focus:border-amber-500">
+    <div class="cursor-pointer flex flex-col text-center items-center min-h-period rounded-lg border shadow-md p-2 focus:border-2 focus:border-amber-500">
         <h5 @click="emitPeriod" class="font-medium leading-tight text-xl mt-0 mb-2 text-gray-600">Period {{periodNumber}}</h5>
         <div v-if="choices !== undefined">
             <div v-for="c in choices.filter(choice => (choice.semester == this.semester && choice.period == this.periodNumber))" :key="c.selectedModule.id" class="flex flex-col justify-between">

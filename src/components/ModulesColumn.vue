@@ -4,25 +4,25 @@
         <div :class="title == 'practicals' ? 'grid grid-cols-2 gap-x-3' : ''">
             <div v-for="s in subject" :key="s.id">
                 <div class="rounded-full border-2 flex justify-between my-2" 
-                :class="color == 'blue' ? 'border-blue-500' 
-                        :color == 'red' ? 'border-red-500'
+                :class="color == 'blue' ? 'border-sky-500' 
+                        :color == 'red' ? 'border-red-400'
                         :color == 'green' ? 'border-green-500'
-                        :color == 'pink' ? 'border-pink-500'
-                        :color == 'sky' ? 'border-sky-500'
-                        :color == 'purple' ? 'border-purple-500'
-                        :color == 'gray' ? 'border-gray-500'
+                        :color == 'pink' ? 'border-rose-300'
+                        :color == 'sky' ? 'border-teal-500'
+                        :color == 'purple' ? 'border-indigo-400'
+                        :color == 'gray' ? 'border-slate-500'
                         : ''">
                     <button @click="moduleClicked(s)" class="px-2 py-2 flex justify-center items-center font-medium">
                         {{s.subject}}{{s.code}}
                     </button>
                     <button class="rounded-r-full w-8 border border-white"
-                    :class="color == 'blue' ? 'bg-blue-500' 
-                        :color == 'red' ? 'bg-red-500'
+                    :class="color == 'blue' ? 'bg-sky-500' 
+                        :color == 'red' ? 'bg-red-400'
                         :color == 'green' ? 'bg-green-500'
-                        :color == 'pink' ? 'bg-pink-500'
-                        :color == 'sky' ? 'bg-sky-500'
-                        :color == 'purple' ? 'bg-purple-500'
-                        :color == 'gray' ? 'bg-gray-500'
+                        :color == 'pink' ? 'bg-rose-300'
+                        :color == 'sky' ? 'bg-teal-500'
+                        :color == 'purple' ? 'bg-indigo-400'
+                        :color == 'gray' ? 'bg-slate-500'
                         : ''">
                         <font-awesome-icon class="text-white" icon="fa-solid fa-info"/>
                     </button>
