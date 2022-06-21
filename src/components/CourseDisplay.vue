@@ -15,9 +15,9 @@
                         </li>
                     </ul>
                     <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-amber-600">Pre-requisites</h5>
-                    <ul>
-                        <li class="ml-6">
-                            {{p.description.pre_requisites}}
+                    <ul class="list-disc">
+                        <li class="ml-6" v-for="(o, index) in p.description.pre_requisites" :key="index">
+                            {{o}}
                         </li>
                     </ul>
                     <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-amber-600">Recommended</h5>
@@ -27,15 +27,15 @@
                         </li>
                     </ul>
                     <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-amber-600">Objectives</h5>
-                    <ul>
-                        <li class="ml-6">
-                            {{p.description.objectives}}
+                    <ul class="list-disc">
+                        <li class="ml-6 text-justify" v-for="(o, index) in p.description.objectives" :key="index">
+                            {{o}}
                         </li>
                     </ul>
                     <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-amber-600">Literature</h5>
-                    <ul>
-                        <li class="ml-6">
-                            {{p.description.literature}}
+                    <ul class="list-disc">
+                        <li class="ml-6 text-justify" v-for="(o, index) in p.description.literature" :key="index">
+                            {{o}}
                         </li>
                     </ul>
                     <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-amber-600">Format</h5>
@@ -53,7 +53,7 @@
                 </div>
                 <div class=" bg-white rounded-lg shadow-xl mx-auto flex flex-col px-7 py-2">
                     <h3 class="self-center font-medium leading-tight text-3xl mt-0 mb-2 text-amber-600">Course Description</h3>
-                    <p class="font-normal text-left text-lg">{{p.description.description}}</p>
+                    <p class="font-normal text-lg text-justify">{{p.description.description}}</p>
                 </div>
             </div>
         </div>
