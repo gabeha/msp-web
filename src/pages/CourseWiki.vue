@@ -50,6 +50,7 @@ export default {
           // .eq('period', '4')
         this.modules = modules
         // console.log(this.modules)
+        console.log(uniq)
         this.sortCourses()
       },
       sortCourses() {

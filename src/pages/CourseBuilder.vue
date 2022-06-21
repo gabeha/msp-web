@@ -1,11 +1,11 @@
 <template>
     <div class="container mx-auto min-h-wiki flex flex-col justify-start">
         <div class="grid grid-cols-5 grid-rows-1 gap-8 text-center m-4">
-            <Semester @period-clicked="fillPool" :semesterNumber="1" :choices="choices"></Semester>
-            <Semester @period-clicked="fillPool" :semesterNumber="2" :choices="choices"></Semester>
-            <Semester @period-clicked="fillPool" :semesterNumber="3" :choices="choices"></Semester>
-            <Semester @period-clicked="fillPool" :semesterNumber="4" :choices="choices"></Semester>
-            <Semester @period-clicked="fillPool" :semesterNumber="5" :choices="choices"></Semester>
+            <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="1" :choices="choices"></Semester>
+            <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="2" :choices="choices"></Semester>
+            <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="3" :choices="choices"></Semester>
+            <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="4" :choices="choices"></Semester>
+            <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="5" :choices="choices"></Semester>
         </div>
         <ModulesPool
             @module-clicked="matchModules"
@@ -58,11 +58,18 @@ export default {
     },
     mounted() {
         this.fetchAllModules()
+        // this.hoken()
     },
     computed() {
 
     },
     methods: {
+        async hoken() {
+            const { data, error } = await supabase
+              .rpc('getuniquemodules')
+            console.log(data)
+            console.log('hi')
+        },
         async fetchAllModules() {
             let { data: modules, error } = await supabase
             .from('modules')
@@ -83,7 +90,6 @@ export default {
                 }
             });
             this.modules_copy = this.modules
-            console.log(this.modules)
             this.fillPool(this.currentPeriod,this.currentSemester)
         },
         fillPool(periodNumber, semesterNumber) {
@@ -116,7 +122,7 @@ export default {
                 period
             };
             this.choices = [...this.choices, choice]
-            // console.log(this.choices)
+            console.log(this.choices)
             this.checkChoices();
             return this.choices
         },
@@ -166,7 +172,7 @@ TODO: assert that no more than two courses can be available for selection
 TODO: refactor! the functions used for filtering can be extracted to improve readability
 */
 
-    matchModules(selectedModule, semester, period) {
+    matchModules(selectedModule, semester, period, add=true) {
 
       // console.log(selectedModule, semester, period)
 
@@ -208,7 +214,10 @@ TODO: refactor! the functions used for filtering can be extracted to improve rea
             this.modules = this.modules.filter(practicalInTheTable => this.filterOutPractical(selectedModule, practicalInTheTable, true))
           }
           this.createSeparateModules(this.modules)
-          this.addChoice(selectedModule, semester, period);
+
+          if(add) {
+            this.addChoice(selectedModule, semester, period);
+          }
         
         //   return this.modules
         }
@@ -377,6 +386,16 @@ TODO: refactor! the functions used for filtering can be extracted to improve rea
           || !(rangeCourseDay1.overlaps(rangePracticalDay2) || rangeCourseDay2.overlaps(rangePracticalDay2)) 
           || !(rangeCourseDay1.overlaps(rangePracticalDay3) || rangeCourseDay2.overlaps(rangePracticalDay3)))
         }}},
+        removeModule(c) {
+            // console.log(this.choices[0].selectedModule.id)
+            // console.log(c.selectedModule.id)
+            this.choices = this.choices.filter(choice => choice.selectedModule.id !== c.selectedModule.id)
+            this.fillPool(c.period, c.semester)
+            this.choices.forEach(element => {
+                    this.matchModules(element.selectedModule, element.semester, element.period, false)
+                })
+            this.checkChoices()
+        }
     }
 }
 </script>
