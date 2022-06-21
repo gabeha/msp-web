@@ -7,8 +7,15 @@
     </button>
     
     <ul :id="'sidebar-menu-'+title" class="hidden py-2 space-y-2 rounded-lg">
-            <li v-for="phy in physics" :key="phy.id">
-                <button @click="this.$emit('course-clicked', phy.id)" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 border-b border-gray-200">{{phy.subject}}{{phy.code}}</button>
+            <li v-for="phy in physics" :key="phy.id" >
+                <button @click="this.$emit('course-clicked', phy.id)" class="flex justify-start items-center text-left p-2 pl-2 w-full text-base font-normal text-gray-900 transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 border-b border-gray-200">
+                <div class="mr-2 font-semibold bg-blue-100 tracking-wider text-blue-800 text-xs py-0.5 px-1 rounded w-max">
+                    {{phy.subject}}{{phy.code}}
+                </div>
+                <div>
+                    {{phy.description.title}}
+                </div>
+                </button>
             </li>
             <li v-for="mat in maths" :key="mat.id">
                 <button @click="this.$emit('course-clicked', mat.id)" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 border-b border-gray-200">{{mat.subject}}{{mat.code}}</button>

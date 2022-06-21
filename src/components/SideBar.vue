@@ -1,5 +1,5 @@
 <template>
-<aside class="h-wiki w-1/3" aria-label="Sidebar">
+<aside class="h-wiki w-2/5" aria-label="Sidebar">
    <div class="overflow-y-auto h-full m-6 bg-white dark:bg-gray-800 ">
       <ul class="space-y-2">
          <li>
