@@ -122,7 +122,9 @@ export default {
                 period
             };
             this.choices = [...this.choices, choice]
-            console.log(this.choices)
+            // console.log(this.choices)
+            // console.log(this.choices.length)
+            // console.log(this.modules)
             this.checkChoices();
             return this.choices
         },
@@ -176,6 +178,7 @@ TODO: refactor! the functions used for filtering can be extracted to improve rea
 
       // console.log(selectedModule, semester, period)
 
+
       if (this.canMakeChoice) {
 
           // ----- Scenario 1: Practical was selected, show all courses available for selection
@@ -214,6 +217,8 @@ TODO: refactor! the functions used for filtering can be extracted to improve rea
             this.modules = this.modules.filter(practicalInTheTable => this.filterOutPractical(selectedModule, practicalInTheTable, true))
           }
           this.createSeparateModules(this.modules)
+
+          
 
           if(add) {
             this.addChoice(selectedModule, semester, period);
