@@ -148,16 +148,19 @@ export default {
         },
         handleSwitchPeriod(semesterNumber, periodNumber) {
 
-            this.choices.filter(choice => (choice.semester == semesterNumber && choice.period == periodNumber)).forEach(element => {
-                    this.matchModules(element.selectedModule, element.semester, element.period, false)
-                })
-
-            // block choices when switching back to a period where choices have already been made
+            // block choices when switching back to a period where all choices have already been made
             if (this.choices.filter(choice => (choice.semester == semesterNumber && choice.period == periodNumber)).length == 3) {
               this.canMakeChoice = false;
-              this.modules = this.modules.filter(course => course.subject !== 'PRA')
+              this.modules = []
+              this.createSeparateModules(this.modules)
             }
-            this.checkSelectedTwoCourses(semesterNumber, periodNumber)
+            // remove the the desired module and then check the availabilities based on the remaining array elements
+            else {
+              this.choices.filter(choice => (choice.semester == semesterNumber && choice.period == periodNumber)).forEach(element => {
+                    this.matchModules(element.selectedModule, element.semester, element.period, false)
+                })
+            }
+            
         },
 /*
 --------------------------------------------------------------------------------------------
