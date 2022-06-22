@@ -58,23 +58,17 @@ export default {
     },
     mounted() {
         this.fetchAllModules()
-        // this.hoken()
     },
     computed() {
 
     },
     methods: {
-        async hoken() {
-            const { data, error } = await supabase
-              .rpc('getuniquemodules')
-            console.log(data)
-            console.log('hi')
-        },
         async fetchAllModules() {
             let { data: modules, error } = await supabase
             .from('modules')
             .select()
             this.modules = modules
+            console.log(this.modules)
             this.modules.forEach(element => {
                 if (element.start1 != null) {
                 element.start1 = new Date(element.start1);
@@ -98,6 +92,9 @@ export default {
             this.currentSemester = semesterNumber
             this.getNewPeriod(periodNumber)
             this.createSeparateModules(this.modules)
+            // this.checkSelectedTwoCourses(semesterNumber, periodNumber)
+            this.canMakeChoice = true;
+            this.handleSwitchPeriod(semesterNumber, periodNumber)
         },
 
         getNewPeriod(period) {
@@ -115,50 +112,53 @@ export default {
         },
 
         addChoice(selectedModule, semester, period) {
-            // console.log('Hi')
             const choice = {
                 selectedModule,
                 semester,
                 period
             };
             this.choices = [...this.choices, choice]
-            // console.log(this.choices)
-            // console.log(this.choices.length)
-            // console.log(this.modules)
-            this.checkChoices();
+            this.checkSelectedTwoCourses(semester, period);
             return this.choices
         },
-        checkChoices() {
+
+        checkSelectedTwoCourses(semester, period) {
             var iterator = 0;
-            var iterators = [2,4,6,8,10,12,14,16,18,20]
+            // var iterators = [2,4,6,8,10,12,14,16,18,20]
+            
             this.choices.forEach(element => {
-                    if (element.selectedModule.subject !== 'PRA') {
-                        iterator++;
-                    // console.log(this.choices)
-                    
+                    if (element.selectedModule.subject !== 'PRA' && element.semester == semester && element.period == period) {
+                        iterator++;                    
                     }
                 })
 
-            // MAASSSSIIVVVE PROBELMS WITH THIS APPROACH (Practicals cannot really be chosen first)
-
             // iterator corresponds to  the number of courses that have been selected
-            if (iterators.includes(iterator)) {
+            if (iterator == 2) {
                 this.modules = this.modules.filter(course => course.subject == 'PRA')
                 this.createSeparateModules(this.modules)
             }
 
-            if ((this.choices.length % 3) == 0) {
-                // this.canMakeChoice = false;
-                // console.log(this.choices)
-                
-            }
-            else {
-                this.canMakeChoice = true;
-                // console.log('third')
-            }
+        },
+        removeModule(c) {
+            this.choices = this.choices.filter(choice => choice.selectedModule.id !== c.selectedModule.id)
+            this.choices.forEach(element => {
+              this.matchModules(element.selectedModule, element.semester, element.period, false)
+                })
+            this.fillPool(c.period, c.semester)
+        },
+        handleSwitchPeriod(semesterNumber, periodNumber) {
 
-            // console.log(this.canMakeChoice)
-    },
+            this.choices.filter(choice => (choice.semester == semesterNumber && choice.period == periodNumber)).forEach(element => {
+                    this.matchModules(element.selectedModule, element.semester, element.period, false)
+                })
+
+            // block choices when switching back to a period where choices have already been made
+            if (this.choices.filter(choice => (choice.semester == semesterNumber && choice.period == periodNumber)).length == 3) {
+              this.canMakeChoice = false;
+              this.modules = this.modules.filter(course => course.subject !== 'PRA')
+            }
+            this.checkSelectedTwoCourses(semesterNumber, periodNumber)
+        },
 /*
 --------------------------------------------------------------------------------------------
 @requires: all modules available for selection (provided by calling it on fetchAllModules())
@@ -391,16 +391,6 @@ TODO: refactor! the functions used for filtering can be extracted to improve rea
           || !(rangeCourseDay1.overlaps(rangePracticalDay2) || rangeCourseDay2.overlaps(rangePracticalDay2)) 
           || !(rangeCourseDay1.overlaps(rangePracticalDay3) || rangeCourseDay2.overlaps(rangePracticalDay3)))
         }}},
-        removeModule(c) {
-            // console.log(this.choices[0].selectedModule.id)
-            // console.log(c.selectedModule.id)
-            this.choices = this.choices.filter(choice => choice.selectedModule.id !== c.selectedModule.id)
-            this.fillPool(c.period, c.semester)
-            this.choices.forEach(element => {
-                    this.matchModules(element.selectedModule, element.semester, element.period, false)
-                })
-            this.checkChoices()
-        }
     }
 }
 </script>

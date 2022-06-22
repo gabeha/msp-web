@@ -50,11 +50,7 @@ export default {
           // .eq('period', '4')
         this.modules = modules
         // console.log(this.modules)
-<<<<<<< HEAD
         // console.log(uniq)
-=======
-    
->>>>>>> aa1caf99804b015e47dd974c977e41c244464fa9
         this.sortCourses()
       },
       sortCourses() {

@@ -18,7 +18,14 @@
                 </button>
             </li>
             <li v-for="mat in maths" :key="mat.id">
-                <button @click="this.$emit('course-clicked', mat.id)" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 border-b border-gray-200">{{mat.subject}}{{mat.code}}</button>
+                <button @click="this.$emit('course-clicked', mat.id)" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 border-b border-gray-200">
+                <div class="mr-2 font-semibold bg-red-100 tracking-wider text-red-800 text-xs py-0.5 px-1 rounded w-max">
+                    {{mat.subject}}{{mat.code}}
+                </div>
+                <div>
+                    {{mat.description.title}}
+                </div>
+                </button>
             </li>
             <li v-for="bio in biology" :key="bio.id">
                 <button @click="this.$emit('course-clicked', bio.id)" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 border-b border-gray-200">{{bio.subject}}{{bio.code}}</button>

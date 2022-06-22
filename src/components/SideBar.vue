@@ -1,6 +1,6 @@
 <template>
 <aside class="h-wiki w-2/5" aria-label="Sidebar">
-   <div class="overflow-y-auto h-full m-6 bg-white dark:bg-gray-800 ">
+   <div class="overflow-y-auto h-full my-6 bg-white dark:bg-gray-800 ">
       <ul class="space-y-2">
          <li>
             <div class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white">
