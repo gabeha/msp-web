@@ -26,7 +26,7 @@ export default {
     },
     methods: {
         emitPeriod() {
-            this.$emit('period-clicked', this.periodNumber)
+            this.$emit('period-clicked', this.periodNumber, this.semester)
         },
         fillPeriods() {
             var mod = this.choices.filter(choice => (choice.semester == this.semester && choice.period == this.periodNumber))

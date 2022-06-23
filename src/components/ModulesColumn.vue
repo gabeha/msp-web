@@ -57,7 +57,7 @@ export default {
     },
     methods: {
         moduleClicked(s) {
-            // console.log(s, this.semester, this.period)
+            // console.log(this.semester + ' ' + this.period)
             this.$emit("module-clicked", s, this.semester, this.period);
         },
         infoClicked(s) {

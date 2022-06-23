@@ -28,8 +28,8 @@ export default {
                 return 4
             }
         },
-        passOn(periodNumber) {
-            this.$emit('period-clicked', periodNumber, this.semesterNumber)
+        passOn(periodNumber, semesterNumber) {
+            this.$emit('period-clicked', periodNumber, semesterNumber)
         },
         moduleRemoved(c) {
             this.$emit('module-removed', c)

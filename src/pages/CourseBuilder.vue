@@ -56,7 +56,6 @@ export default {
             chemistry: [],
             interdisciplinary: [],
             practicals: [],
-
             choices: []
         }
     },
@@ -72,7 +71,7 @@ export default {
             .from('modules')
             .select()
             this.modules = modules
-            console.log(this.modules)
+            // console.log(this.modules)
             this.modules.forEach(element => {
                 if (element.start1 != null) {
                 element.start1 = new Date(element.start1);
@@ -88,7 +87,7 @@ export default {
                 }
             });
             this.modules_copy = this.modules
-            this.fillPool(this.currentPeriod,this.currentSemester)
+            this.fillPool(1,1)
         },
         showInfoCard(s) {
           console.log(s)
@@ -96,37 +95,34 @@ export default {
             this.showInfo = true
         },
         fillPool(periodNumber, semesterNumber) {
-            // console.log(this.modules)
             this.currentPeriod = periodNumber
             this.currentSemester = semesterNumber
-            this.getNewPeriod(periodNumber)
-            this.createSeparateModules(this.modules)
-            // this.checkSelectedTwoCourses(semesterNumber, periodNumber)
-            this.canMakeChoice = true;
-            this.handleSwitchPeriod(semesterNumber, periodNumber)
+            this.modules = []
+            this.handleSwitchPeriod(this.currentSemester, this.currentPeriod)
         },
 
         getNewPeriod(period) {
             this.modules = this.modules_copy.filter(module => module.period == period)
+            console.log(this.modules)
 
             // this removes a module contained in choices from the list of available modules in other periods as well
-            // for(var i=0; i < this.modules.length; i++) {
-            //     for(var j=0; j < this.choices.length; j++) {
-            //         if(this.modules[i].subject == this.choices[j].selectedModule.subject && this.modules[i].code == this.choices[j].selectedModule.code) {
-            //             this.modules.splice(i,1)
-            //         }
-            //     }
-            // }
+            for(var i=0; i < this.modules.length; i++) {
+                for(var j=0; j < this.choices.length; j++) {
+                    if(this.modules[i].subject == this.choices[j].selectedModule.subject && this.modules[i].code == this.choices[j].selectedModule.code) {
+                        this.modules.splice(i,1)
+                    }
+                }
+            }
         },
 
-        createSeparateModules(modules) {
-            this.physics = modules.filter(module => module.subject == 'PHY')
-            this.maths = modules.filter(module => module.subject == 'MAT')
-            this.biology = modules.filter(module => module.subject == 'BIO')
-            this.neuroscience = modules.filter(module => module.subject == 'NEU')
-            this.chemistry = modules.filter(module => module.subject == 'CHE')
-            this.interdisciplinary = modules.filter(module => module.subject == 'INT')
-            this.practicals = modules.filter(module => module.subject == 'PRA')
+        createSeparateModules() {
+            this.physics = this.modules.filter(module => module.subject == 'PHY')
+            this.maths = this.modules.filter(module => module.subject == 'MAT')
+            this.biology = this.modules.filter(module => module.subject == 'BIO')
+            this.neuroscience = this.modules.filter(module => module.subject == 'NEU')
+            this.chemistry = this.modules.filter(module => module.subject == 'CHE')
+            this.interdisciplinary = this.modules.filter(module => module.subject == 'INT')
+            this.practicals = this.modules.filter(module => module.subject == 'PRA')
         },
 
         addChoice(selectedModule, semester, period) {
@@ -136,15 +132,12 @@ export default {
                 period
             };
             this.choices.push(choice)
-            // console.log(this.modules.subject)
             this.checkSelectedTwoCourses(semester, period);
             // return this.choices
         },
 
         checkSelectedTwoCourses(semester, period) {
             var iterator = 0;
-            // var iterators = [2,4,6,8,10,12,14,16,18,20]
-            
             this.choices.forEach(element => {
                     if ((element.selectedModule.subject !== 'PRA') && (element.semester == semester) && (element.period == period)) {
                         iterator++;                    
@@ -177,8 +170,12 @@ export default {
             }
             // remove the desired module and then check the availabilities based on the remaining array elements
             else {
+              this.getNewPeriod(this.currentPeriod)
+              this.createSeparateModules()
+
               this.choices.filter(choice => (choice.semester == semesterNumber && choice.period == periodNumber)).forEach(element => {
                     this.matchModules(element.selectedModule, element.semester, element.period, false)
+                    // this.checkSelectedTwoCourses(semesterNumber, periodNumber)
                 })
             }
             
@@ -200,10 +197,9 @@ TODO: refactor! the functions used for filtering can be extracted to improve rea
 
     matchModules(selectedModule, semester, period, add=true) {
 
-      // console.log(selectedModule, semester, period)
-
 
       if (this.canMakeChoice) {
+
 
           // ----- Scenario 1: Practical was selected, show all courses available for selection
 
@@ -241,8 +237,6 @@ TODO: refactor! the functions used for filtering can be extracted to improve rea
             this.modules = this.modules.filter(practicalInTheTable => this.filterPractical(selectedModule, practicalInTheTable, true))
           }
           this.createSeparateModules(this.modules)
-          console.log(this.modules)
-          
 
           if(add) {
             this.addChoice(selectedModule, semester, period);
