@@ -56,6 +56,7 @@ export default {
             chemistry: [],
             interdisciplinary: [],
             practicals: [],
+
             choices: []
         }
     },
@@ -71,7 +72,30 @@ export default {
             .from('modules')
             .select()
             this.modules = modules
-            // console.log(this.modules)
+            console.log(this.modules)
+            this.modules.forEach(element => {
+                if (element.start1 != null) {
+                element.start1 = new Date(element.start1);
+                element.end1 = new Date(element.end1);
+                }
+                if (element.start2 != null) {
+                element.start2 = new Date(element.start2);
+                element.end2 = new Date(element.end2);
+                }
+                if (element.start3 != null) {
+                element.start3 = new Date(element.start3);
+                element.end3 = new Date(element.end3);
+                }
+            });
+            this.modules_copy = this.modules
+            this.fillPool(this.currentPeriod,this.currentSemester)
+        },
+        async accessSupabase() {
+          let { data: modules, error } = await supabase
+            .from('modules')
+            .select()
+            this.modules = modules
+            console.log(this.modules)
             this.modules.forEach(element => {
                 if (element.start1 != null) {
                 element.start1 = new Date(element.start1);
@@ -97,13 +121,14 @@ export default {
         fillPool(periodNumber, semesterNumber) {
             this.currentPeriod = periodNumber
             this.currentSemester = semesterNumber
-            this.modules = []
-            this.handleSwitchPeriod(this.currentSemester, this.currentPeriod)
+            this.getNewPeriod(periodNumber)
+            this.createSeparateModules(this.modules)
+            this.canMakeChoice = true;
+            this.handleSwitchPeriod(semesterNumber, periodNumber)
         },
 
-        getNewPeriod(period) {
-            this.modules = this.modules_copy.filter(module => module.period == period)
-            console.log(this.modules)
+        async getNewPeriod(period) {
+            this.modules = this.modules_copy.filter(module => module.period == period).map(module => ({...module}))
 
             // this removes a module contained in choices from the list of available modules in other periods as well
             for(var i=0; i < this.modules.length; i++) {
@@ -115,14 +140,14 @@ export default {
             }
         },
 
-        createSeparateModules() {
-            this.physics = this.modules.filter(module => module.subject == 'PHY')
-            this.maths = this.modules.filter(module => module.subject == 'MAT')
-            this.biology = this.modules.filter(module => module.subject == 'BIO')
-            this.neuroscience = this.modules.filter(module => module.subject == 'NEU')
-            this.chemistry = this.modules.filter(module => module.subject == 'CHE')
-            this.interdisciplinary = this.modules.filter(module => module.subject == 'INT')
-            this.practicals = this.modules.filter(module => module.subject == 'PRA')
+        createSeparateModules(modules) {
+            this.physics = modules.filter(module => module.subject == 'PHY')
+            this.maths = modules.filter(module => module.subject == 'MAT')
+            this.biology = modules.filter(module => module.subject == 'BIO')
+            this.neuroscience = modules.filter(module => module.subject == 'NEU')
+            this.chemistry = modules.filter(module => module.subject == 'CHE')
+            this.interdisciplinary = modules.filter(module => module.subject == 'INT')
+            this.practicals = modules.filter(module => module.subject == 'PRA')
         },
 
         addChoice(selectedModule, semester, period) {
@@ -133,11 +158,12 @@ export default {
             };
             this.choices.push(choice)
             this.checkSelectedTwoCourses(semester, period);
-            // return this.choices
         },
 
         checkSelectedTwoCourses(semester, period) {
             var iterator = 0;
+            // var iterators = [2,4,6,8,10,12,14,16,18,20]
+            
             this.choices.forEach(element => {
                     if ((element.selectedModule.subject !== 'PRA') && (element.semester == semester) && (element.period == period)) {
                         iterator++;                    
@@ -170,12 +196,8 @@ export default {
             }
             // remove the desired module and then check the availabilities based on the remaining array elements
             else {
-              this.getNewPeriod(this.currentPeriod)
-              this.createSeparateModules()
-
               this.choices.filter(choice => (choice.semester == semesterNumber && choice.period == periodNumber)).forEach(element => {
                     this.matchModules(element.selectedModule, element.semester, element.period, false)
-                    // this.checkSelectedTwoCourses(semesterNumber, periodNumber)
                 })
             }
             
@@ -197,9 +219,10 @@ TODO: refactor! the functions used for filtering can be extracted to improve rea
 
     matchModules(selectedModule, semester, period, add=true) {
 
+      // console.log(selectedModule, semester, period)
+
 
       if (this.canMakeChoice) {
-
 
           // ----- Scenario 1: Practical was selected, show all courses available for selection
 
@@ -237,6 +260,8 @@ TODO: refactor! the functions used for filtering can be extracted to improve rea
             this.modules = this.modules.filter(practicalInTheTable => this.filterPractical(selectedModule, practicalInTheTable, true))
           }
           this.createSeparateModules(this.modules)
+          console.log(this.modules)
+          
 
           if(add) {
             this.addChoice(selectedModule, semester, period);
