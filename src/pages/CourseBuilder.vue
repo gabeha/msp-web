@@ -1,27 +1,42 @@
 <template>
-    <div class="container mx-auto min-h-wiki flex flex-col justify-start">
-        <div class="grid grid-cols-5 grid-rows-1 gap-8 text-center m-4">
-            <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="1" :choices="choices"></Semester>
-            <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="2" :choices="choices"></Semester>
-            <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="3" :choices="choices"></Semester>
-            <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="4" :choices="choices"></Semester>
-            <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="5" :choices="choices"></Semester>
-        </div>
-        <ModulesPool
-            @module-clicked="matchModules"
-            @info-clicked="showInfoCard"
-            @next-period="fillPool"
-            :period="this.currentPeriod"
-            :semester="this.currentSemester"
-            :modules="this.modules" 
-            :physics="this.physics" 
-            :maths="this.maths" 
-            :biology="this.biology"
-            :neuroscience="this.neuroscience"
-            :chemistry="this.chemistry"
-            :interdisciplinary="this.interdisciplinary"
-            :practicals="this.practicals"></ModulesPool>
-        <!-- <CourseDisplay class="absolute top-0 r-10-96 w-1/3" :modules="modules" :highlightedModule="infoModule" v-show="showInfo"></CourseDisplay> -->
+    <div class="container mx-auto min-h-wiki">
+      <div class="hidden xl:flex flex-col justify-start transition-opacity" :class="showInfo ? 'opacity-20' : ''">
+          <div class="grid grid-cols-5 grid-rows-1 gap-8 text-center m-4">
+              <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="1" :choices="choices"></Semester>
+              <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="2" :choices="choices"></Semester>
+              <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="3" :choices="choices"></Semester>
+              <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="4" :choices="choices"></Semester>
+              <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="5" :choices="choices"></Semester>
+          </div>
+          <ModulesPool
+              @module-clicked="matchModules"
+              @info-clicked="showInfoCard"
+              @next-period="fillPool"
+              :period="this.currentPeriod"
+              :semester="this.currentSemester"
+              :modules="this.modules" 
+              :physics="this.physics" 
+              :maths="this.maths" 
+              :biology="this.biology"
+              :neuroscience="this.neuroscience"
+              :chemistry="this.chemistry"
+              :interdisciplinary="this.interdisciplinary"
+              :practicals="this.practicals">
+            </ModulesPool>
+      </div>
+      <div class="flex flex-col justify-center items-center h-wiki xl:hidden">
+          <font-awesome-icon class="text-9xl opacity-50" icon="fa-solid fa-screwdriver-wrench" />
+          <h5 class="mt-5 text-lg text-center font-semibold">
+              The Course Builder on mobile is a work in progress...
+          </h5>
+          <h5 class="mt-5 text-lg text-center font-semibold text-sky-700">
+              Head over to your Laptop or PC to make your choices!
+          </h5>
+      </div>
+    <Transition name="slide-fade">
+        <InfoCard :infoModule="infoModule" @close-info-card="this.showInfo = !this.showInfo" v-show="showInfo"></InfoCard>
+    </Transition>
+    
     </div>
 
 
@@ -115,8 +130,8 @@ export default {
         },
         showInfoCard(s) {
           console.log(s)
-            this.infoModule = s.id
-            this.showInfo = true
+            this.infoModule = s
+            this.showInfo = !this.showInfo
         },
         fillPool(periodNumber, semesterNumber) {
             this.currentPeriod = periodNumber
@@ -198,6 +213,7 @@ export default {
             else {
               this.choices.filter(choice => (choice.semester == semesterNumber && choice.period == periodNumber)).forEach(element => {
                     this.matchModules(element.selectedModule, element.semester, element.period, false)
+                    this.checkSelectedTwoCourses(semesterNumber, periodNumber)
                 })
             }
             
@@ -325,3 +341,23 @@ TODO: refactor! the functions used for filtering can be extracted to improve rea
   }
 
 </script>
+
+<style>
+/*
+  Enter and leave animations can use different
+  durations and timing functions.
+*/
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(500px);
+  /* opacity: 0; */
+}
+</style>
