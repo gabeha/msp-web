@@ -9,6 +9,7 @@
         </div>
         <ModulesPool
             @module-clicked="matchModules"
+            @info-clicked="showInfoCard"
             @next-period="fillPool"
             :period="this.currentPeriod"
             :semester="this.currentSemester"
@@ -20,8 +21,9 @@
             :chemistry="this.chemistry"
             :interdisciplinary="this.interdisciplinary"
             :practicals="this.practicals"></ModulesPool>
-        
+        <!-- <CourseDisplay class="absolute top-0 r-10-96 w-1/3" :modules="modules" :highlightedModule="infoModule" v-show="showInfo"></CourseDisplay> -->
     </div>
+
 
 </template>
 
@@ -36,8 +38,8 @@ const moment = extendMoment(Moment);
 export default {
     name: 'CourseBuilder',
     components: {
-        
-    },
+    
+},
     data() {
         return {
             modules: [],
@@ -45,6 +47,8 @@ export default {
             currentPeriod: 1,
             currentSemester: 1,
             canMakeChoice: true,
+            showInfo: false,
+            infoModule: null,
             physics: [],
             maths: [],
             biology: [],
@@ -86,6 +90,11 @@ export default {
             this.modules_copy = this.modules
             this.fillPool(this.currentPeriod,this.currentSemester)
         },
+        showInfoCard(s) {
+          console.log(s)
+            this.infoModule = s.id
+            this.showInfo = true
+        },
         fillPool(periodNumber, semesterNumber) {
             // console.log(this.modules)
             this.currentPeriod = periodNumber
@@ -99,6 +108,15 @@ export default {
 
         getNewPeriod(period) {
             this.modules = this.modules_copy.filter(module => module.period == period)
+
+            // this removes a module contained in choices from the list of available modules in other periods as well
+            // for(var i=0; i < this.modules.length; i++) {
+            //     for(var j=0; j < this.choices.length; j++) {
+            //         if(this.modules[i].subject == this.choices[j].selectedModule.subject && this.modules[i].code == this.choices[j].selectedModule.code) {
+            //             this.modules.splice(i,1)
+            //         }
+            //     }
+            // }
         },
 
         createSeparateModules(modules) {
@@ -117,9 +135,10 @@ export default {
                 semester,
                 period
             };
-            this.choices = [...this.choices, choice]
+            this.choices.push(choice)
+            // console.log(this.modules.subject)
             this.checkSelectedTwoCourses(semester, period);
-            return this.choices
+            // return this.choices
         },
 
         checkSelectedTwoCourses(semester, period) {
@@ -127,7 +146,7 @@ export default {
             // var iterators = [2,4,6,8,10,12,14,16,18,20]
             
             this.choices.forEach(element => {
-                    if (element.selectedModule.subject !== 'PRA' && element.semester == semester && element.period == period) {
+                    if ((element.selectedModule.subject !== 'PRA') && (element.semester == semester) && (element.period == period)) {
                         iterator++;                    
                     }
                 })
@@ -141,10 +160,12 @@ export default {
         },
         removeModule(c) {
             this.choices = this.choices.filter(choice => choice.selectedModule.id !== c.selectedModule.id)
-            this.choices.forEach(element => {
-              this.matchModules(element.selectedModule, element.semester, element.period, false)
-                })
             this.fillPool(c.period, c.semester)
+            // this.choices.forEach(element => {
+            //   this.matchModules(element.selectedModule, element.semester, element.period, false)
+            //     })
+            this.checkSelectedTwoCourses(c.semester, c.period)
+            
         },
         handleSwitchPeriod(semesterNumber, periodNumber) {
 
@@ -154,7 +175,7 @@ export default {
               this.modules = []
               this.createSeparateModules(this.modules)
             }
-            // remove the the desired module and then check the availabilities based on the remaining array elements
+            // remove the desired module and then check the availabilities based on the remaining array elements
             else {
               this.choices.filter(choice => (choice.semester == semesterNumber && choice.period == periodNumber)).forEach(element => {
                     this.matchModules(element.selectedModule, element.semester, element.period, false)
@@ -195,7 +216,7 @@ TODO: refactor! the functions used for filtering can be extracted to improve rea
             })
 
             // Step 2: compare timeslot for each course in the availability list and remove overlapping ones
-            this.modules = this.modules.filter(courseInTheTable => this.filterOutPractical(courseInTheTable, selectedModule, false))
+            this.modules = this.modules.filter(courseInTheTable => this.filterPractical(courseInTheTable, selectedModule, false))
           }
 
           // ----- Scenario 2: Course was selected, show all practicals and courses available for selection
@@ -217,10 +238,10 @@ TODO: refactor! the functions used for filtering can be extracted to improve rea
             })
 
             // show all available practicals
-            this.modules = this.modules.filter(practicalInTheTable => this.filterOutPractical(selectedModule, practicalInTheTable, true))
+            this.modules = this.modules.filter(practicalInTheTable => this.filterPractical(selectedModule, practicalInTheTable, true))
           }
           this.createSeparateModules(this.modules)
-
+          console.log(this.modules)
           
 
           if(add) {
@@ -231,169 +252,57 @@ TODO: refactor! the functions used for filtering can be extracted to improve rea
         }
   },      
 //--------------------------------------------------------------------------------------------
-
-    /* @requires: practical input and course input, one of which will correspond to the selected module 
-    and the other will represent the module object passed in by the filter function, as per selectedModule() function
-    */
-   filterOutPractical(course, practical, removingPracticalsFromAvailabilityList){
-    {   
-        // get timeslots of the course 
-        const rangeCourseDay1 = moment.range(course.start1, course.end1)
-        const rangeCourseDay2 = moment.range(course.start2, course.end2)
-
-         // get the timeslot for the first day when the practical is offered
-        // const rangePracticalDay1 = moment.range(practical.start1, practical.end1)
-
-        // if practical is only offered once a day 
-        // we cant assume which day it is, so we check all three
-
-        // first slot is not null
-        if ((practical.start1 !== null )&& (practical.start2 == null) && (practical.start3 == null)) 
-        {
-        const rangePracticalDay1 = moment.range(practical.start1, practical.end1)
-         return (!(rangeCourseDay1.overlaps(rangePracticalDay1) || rangeCourseDay2.overlaps(rangePracticalDay1)))
-       }
-// second slot is not null
-       if ((practical.start2 !== null) && (practical.start1 == null) && (practical.start3 == null)) 
-       {
-       const rangePracticalDay1 = moment.range(practical.start2, practical.end2)
-        return (!(rangeCourseDay1.overlaps(rangePracticalDay1) || rangeCourseDay2.overlaps(rangePracticalDay1)))
-      }
-// third slot is not null
-      if ((practical.start3 !== null) && (practical.start1 == null) && (practical.start2 == null)) 
-       {
-       const rangePracticalDay1 = moment.range(practical.start3, practical.end3)
-        return (!(rangeCourseDay1.overlaps(rangePracticalDay1) || rangeCourseDay2.overlaps(rangePracticalDay1)))
-      }
-
-
-        // if the practical is offered on two different days
-        // first and second day are not null
-        if ((practical.start3 == null) && (practical.start2 !== null) && (practical.start1 !== null)) {
-          const rangePracticalDay2 = moment.range(practical.start2, practical.end2);
-          const rangePracticalDay1 = moment.range(practical.start1, practical.end1)
-
-          // make sure that it doesnt work when we have already selected 
-          // a practical and now checking available courses
-          const overlap1 = rangeCourseDay1.overlaps(rangePracticalDay1)
-          const overlap2 = rangeCourseDay2.overlaps(rangePracticalDay1)
-
-          const overlap3 = rangeCourseDay1.overlaps(rangePracticalDay2) 
-          const overlap4 = rangeCourseDay2.overlaps(rangePracticalDay2)
-          if (removingPracticalsFromAvailabilityList){
-            if(overlap1 || overlap2){
-              practical.start1 = null
-              practical.end1 = null
+   /* @requires: practical input and course input, one of which will correspond to the selected module 
+          and the other will represent the module object passed in by the filter function, as per selectedModule() function
+          */
+          filterPractical(course, practical, removingPracticalsFromAvailabilityList)
+          {
+            // extract the course ranges
+            const rangeCourseDay1 = moment.range(course.start1, course.end1)
+            const rangeCourseDay2 = moment.range(course.start2, course.end2)
+            // create the course range array
+            let courseRanges = [rangeCourseDay1, rangeCourseDay2]
+            let practicalDays = [practical.start1, practical.start2, practical.start3]
+            let practicalEnds = [practical.end1, practical.end2, practical.end3]
+            let overlaps = []
+            // we go over all three practical days..
+            for (let i = 0; i < practicalDays.length; i++)
+            {
+              // and check if its not null
+              if (practicalDays[i] !== null) 
+              { 
+                  overlaps[i] = false
+                  let rangePractical = moment.range(practicalDays[i], practicalEnds[i])
+                  courseRanges.forEach(courseRange =>
+                  {
+                      if (rangePractical.overlaps(courseRange))
+                    {
+                      overlaps[i] = true
+                      if (removingPracticalsFromAvailabilityList)
+                      {
+                        switch (i)
+                        {
+                          case 0:
+                            practical.start1 = null;
+                            practical.end1 = null;
+                            break;
+                          case 1:
+                            practical.start2 = null;
+                            practical.end2 = null;
+                            break;
+                          case 2:
+                            practical.start3 = null;
+                            practical.end3 = null;
+                            break;
+                        }
+                        } }}) }}
+              let finalClause = false
+              overlaps.forEach(clause => {
+                finalClause = finalClause || !clause
+              })
+              return finalClause
             }
-            if(overlap3 || overlap4){
-              practical.start2 = null
-              practical.end2 = null
-            }
-
           }
+  }
 
-          return(!(rangeCourseDay1.overlaps(rangePracticalDay1) || rangeCourseDay2.overlaps(rangePracticalDay1)) 
-          || !(rangeCourseDay1.overlaps(rangePracticalDay2) || rangeCourseDay2.overlaps(rangePracticalDay2)))
-
-        }
-
-           // if the practical is offered on two different days
-           // first and third slots are not null
-           if ((practical.start3 !== null) && (practical.start1 !== null) && (practical.start2 == null)) {
-            const rangePracticalDay2 = moment.range(practical.start3, practical.end3);
-            const rangePracticalDay1 = moment.range(practical.start1, practical.end1)
-  
-            // make sure that it doesnt work when we have already selected 
-            // a practical and now checking available courses
-            const overlap1 = rangeCourseDay1.overlaps(rangePracticalDay1)
-            const overlap2 = rangeCourseDay2.overlaps(rangePracticalDay1)
-  
-            const overlap3 = rangeCourseDay1.overlaps(rangePracticalDay2) 
-            const overlap4 = rangeCourseDay2.overlaps(rangePracticalDay2)
-
-            if (removingPracticalsFromAvailabilityList){
-              if(overlap1 || overlap2){
-                practical.start1 = null
-                practical.end1 = null
-              }
-              if(overlap3 || overlap4){
-                practical.start3 = null
-                practical.end3 = null
-              }
-  
-            }
-  
-            return(!(rangeCourseDay1.overlaps(rangePracticalDay1) || rangeCourseDay2.overlaps(rangePracticalDay1)) 
-            || !(rangeCourseDay1.overlaps(rangePracticalDay2) || rangeCourseDay2.overlaps(rangePracticalDay2)))
-  
-          }
-
-             // if the practical is offered on two different days
-             // second and third slots are not null
-        if ((practical.start3 !== null) && (practical.start2 !== null) && (practical.start1 == null)) {
-            const rangePracticalDay1 = moment.range(practical.start2, practical.end2);
-            const rangePracticalDay2 = moment.range(practical.start3, practical.end3)
-  
-            // make sure that it doesnt work when we have already selected 
-            // a practical and now checking available courses
-            const overlap1 = rangeCourseDay1.overlaps(rangePracticalDay1)
-            const overlap2 = rangeCourseDay2.overlaps(rangePracticalDay1)
-  
-            const overlap3 = rangeCourseDay1.overlaps(rangePracticalDay2) 
-            const overlap4 = rangeCourseDay2.overlaps(rangePracticalDay2)
-            
-            if (removingPracticalsFromAvailabilityList){
-              if(overlap1 || overlap2){
-                practical.start2 = null
-                practical.end2 = null
-              }
-              if(overlap3 || overlap4){
-                practical.start3 = null
-                practical.end3 = null
-              }
-  
-            }
-  
-            return(!(rangeCourseDay1.overlaps(rangePracticalDay1) || rangeCourseDay2.overlaps(rangePracticalDay1)) 
-            || !(rangeCourseDay1.overlaps(rangePracticalDay2) || rangeCourseDay2.overlaps(rangePracticalDay2)))
-  
-          }
-
-        // if the practical is offered on three different days
-        if ((practical.start3 !== null)&& (practical.start1 !== null) &&(practical.start2 !== null)) {
-            const rangePracticalDay1 = moment.range(practical.start1, practical.end1);
-            const rangePracticalDay2 = moment.range(practical.start2, practical.end2);
-            const rangePracticalDay3 = moment.range(practical.start3, practical.end3);
-
-          const overlap1 = rangeCourseDay1.overlaps(rangePracticalDay1)
-          const overlap2 = rangeCourseDay2.overlaps(rangePracticalDay1)
-
-          const overlap3 = rangeCourseDay1.overlaps(rangePracticalDay2) 
-          const overlap4 = rangeCourseDay2.overlaps(rangePracticalDay2)
-
-          const overlap5 = rangeCourseDay1.overlaps(rangePracticalDay3)
-          const overlap6 = rangeCourseDay2.overlaps(rangePracticalDay3)
-
-          if (removingPracticalsFromAvailabilityList){
-            if(overlap1 || overlap2){
-              practical.start1 = null
-              practical.end1 = null
-            }
-            if(overlap3 || overlap4){
-              practical.start2 = null
-              practical.end2 = null
-            }
-             if(overlap5 || overlap6){
-              practical.start3 = null
-              practical.end3 = null
-            }
-
-          }
-
-          return (!(rangeCourseDay1.overlaps(rangePracticalDay1) || rangeCourseDay2.overlaps(rangePracticalDay1)) 
-          || !(rangeCourseDay1.overlaps(rangePracticalDay2) || rangeCourseDay2.overlaps(rangePracticalDay2)) 
-          || !(rangeCourseDay1.overlaps(rangePracticalDay3) || rangeCourseDay2.overlaps(rangePracticalDay3)))
-        }}},
-    }
-}
 </script>

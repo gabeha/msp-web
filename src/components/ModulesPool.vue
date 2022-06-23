@@ -2,13 +2,13 @@
     <div class="py-4 m-4 rounded-xl border border-gray-600 shadow-xl text-center h-pool">
         <h3 class="self-center font-medium leading-tight text-3xl mt-0 mb-2 text-sky-600">Modules - Semester {{this.semester}}, Period {{this.period}}</h3>
         <div v-if="modules !== undefined" class="flex justify-around">
-            <ModulesColumn @module-clicked="passOn" :subject="physics" :semester="semester" :period="period" title="physics" color="blue"></ModulesColumn>
-            <ModulesColumn @module-clicked="passOn" :subject="maths" :semester="semester" :period="period" title="maths" color="red"></ModulesColumn>
-            <ModulesColumn @module-clicked="passOn" :subject="biology" :semester="semester" :period="period" title="biology" color="green"></ModulesColumn>
-            <ModulesColumn @module-clicked="passOn" :subject="neuroscience" :semester="semester" :period="period" title="neuroscience" color="pink"></ModulesColumn>
-            <ModulesColumn @module-clicked="passOn" :subject="chemistry" :semester="semester" :period="period" title="chemistry" color="sky"></ModulesColumn>
-            <ModulesColumn @module-clicked="passOn" :subject="interdisciplinary" :semester="semester" :period="period" title="interdisciplinary" color="purple"></ModulesColumn>
-            <ModulesColumn @module-clicked="passOn" :subject="practicals" :semester="semester" :period="period" title="practicals" color="gray"></ModulesColumn>
+            <ModulesColumn @module-clicked="passOn" @info-clicked="passOnInfo" :subject="physics" :semester="semester" :period="period" title="physics" color="blue"></ModulesColumn>
+            <ModulesColumn @module-clicked="passOn" @info-clicked="passOnInfo" :subject="maths" :semester="semester" :period="period" title="maths" color="red"></ModulesColumn>
+            <ModulesColumn @module-clicked="passOn" @info-clicked="passOnInfo" :subject="biology" :semester="semester" :period="period" title="biology" color="green"></ModulesColumn>
+            <ModulesColumn @module-clicked="passOn" @info-clicked="passOnInfo" :subject="neuroscience" :semester="semester" :period="period" title="neuroscience" color="pink"></ModulesColumn>
+            <ModulesColumn @module-clicked="passOn" @info-clicked="passOnInfo" :subject="chemistry" :semester="semester" :period="period" title="chemistry" color="sky"></ModulesColumn>
+            <ModulesColumn @module-clicked="passOn" @info-clicked="passOnInfo" :subject="interdisciplinary" :semester="semester" :period="period" title="interdisciplinary" color="purple"></ModulesColumn>
+            <ModulesColumn @module-clicked="passOn" @info-clicked="passOnInfo" :subject="practicals" :semester="semester" :period="period" title="practicals" color="gray"></ModulesColumn>
         </div>
         <div v-if="modules.length == 0" class="flex justify-center items-center h-full">
             <h1 class="font-medium leading-tight text-3xl mt-2 mb-2 text-gray-600">You have successfully selected your modules for this period!</h1>
@@ -36,6 +36,9 @@ export default {
     methods: {
         passOn(s, semester, period) {
             this.$emit("module-clicked", s, semester, period);
+        },
+        passOnInfo(s) {
+            this.$emit("info-clicked", s)
         },
         nextPeriod() {
             if (this.semester == 1 || this.semester == 3 || this.semester == 5) {

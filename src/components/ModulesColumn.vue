@@ -1,7 +1,7 @@
 <template>
     <div v-if="subject !== undefined" class="flex flex-col items-center">
     <h4 class="font-normal leading-tight text-xl mt-0 mb-4 text-gray-600 capitalize">{{title}}</h4>
-        <div :class="title == 'practicals' ? 'grid grid-cols-2 gap-x-3' : ''">
+        <div :class="title == 'practicals' ? 'grid grid-cols-2 gap-x-3' : 'mx-3'">
             <div v-for="s in subject" :key="s.id">
                 <div class="rounded-full border-2 flex justify-between my-2" 
                 :class="color == 'blue' ? 'border-sky-500' 
@@ -12,10 +12,15 @@
                         :color == 'purple' ? 'border-indigo-400'
                         :color == 'gray' ? 'border-slate-500'
                         : ''">
-                    <button @click="moduleClicked(s)" class="px-2 py-2 flex justify-center items-center font-medium">
-                        {{s.subject}}{{s.code}}
+                    <button @click="moduleClicked(s)" class="px-2 py-2 flex flex-col justify-center items-center font-medium">
+                        <h4>
+                            {{s.subject}}{{s.code}}
+                        </h4>
+                        <!-- <p class="text-[10px]">
+                            {{s.description.title}}
+                        </p> -->
                     </button>
-                    <button class="rounded-r-full w-8 border border-white"
+                    <button @click="infoClicked(s)" class="rounded-r-full w-8 border border-white"
                     :class="color == 'blue' ? 'bg-sky-500' 
                         :color == 'red' ? 'bg-red-400'
                         :color == 'green' ? 'bg-green-500'
@@ -54,6 +59,9 @@ export default {
         moduleClicked(s) {
             // console.log(s, this.semester, this.period)
             this.$emit("module-clicked", s, this.semester, this.period);
+        },
+        infoClicked(s) {
+            this.$emit('infoClicked', s)
         }
     }
 }
