@@ -13,6 +13,7 @@ module.exports = {
     extend: {
       spacing: {
         'wiki': 'calc(100vh - 141px);',
+        'info': 'calc(100vh - 111px);',
         'pool': '38rem;'
       }
     },

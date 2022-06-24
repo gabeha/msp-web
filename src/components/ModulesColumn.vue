@@ -16,7 +16,7 @@
                         <h4>
                             {{s.subject}}{{s.code}}
                         </h4>
-                        <!-- <p class="text-[10px]">
+                        <!-- <p class="text-[14px]">
                             {{s.description.title}}
                         </p> -->
                     </button>
