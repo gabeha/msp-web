@@ -34,7 +34,7 @@
                             </button>
                         </div>
                         
-                        <h1 class="hidden group-hover:block fixed bg-amber-50 p-3 border border-gray-400 rounded-lg font-medium">
+                        <h1 class="hidden group-hover:block absolute bg-white p-3 border border-amber-400 rounded-lg font-medium text-lg">
                             {{s.description.title}}
                         </h1>
                     </div>
