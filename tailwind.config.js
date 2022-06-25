@@ -8,7 +8,12 @@ module.exports = {
   theme: {
     minHeight: {
       'wiki': 'calc(100vh - 141px);',
-      'period': '12rem'
+      'period': '12rem',
+      'card': '150px'
+    },
+    maxHeight: {
+      'pracs': 'calc(100vh - 350px);',
+      'pool': '38rem;'
     },
     extend: {
       spacing: {
@@ -16,6 +21,11 @@ module.exports = {
         'info': 'calc(100vh - 111px);',
         'pool': '38rem;'
       }
+    },
+  },
+  variants: {
+    extend: {
+        display: ["group-hover"],
     },
   },
   plugins: [

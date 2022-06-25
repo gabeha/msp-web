@@ -2,27 +2,30 @@
     <div class="container mx-auto min-h-wiki">
       <div class="hidden xl:flex flex-col justify-start transition-opacity" :class="showInfo ? 'opacity-20' : ''">
           <div class="grid grid-cols-5 grid-rows-1 gap-8 text-center m-4">
-              <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="1" :choices="choices"></Semester>
-              <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="2" :choices="choices"></Semester>
-              <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="3" :choices="choices"></Semester>
-              <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="4" :choices="choices"></Semester>
-              <Semester @period-clicked="fillPool" @module-removed="removeModule" :semesterNumber="5" :choices="choices"></Semester>
+              <Semester @period-clicked="fillPool" @module-removed="removeModule" @info-clicked="showInfoCard" :semesterNumber="1" :choices="choices" :current="[this.currentSemester, this.currentPeriod]"></Semester>
+              <Semester @period-clicked="fillPool" @module-removed="removeModule" @info-clicked="showInfoCard" :semesterNumber="2" :choices="choices" :current="[this.currentSemester, this.currentPeriod]"></Semester>
+              <Semester @period-clicked="fillPool" @module-removed="removeModule" @info-clicked="showInfoCard" :semesterNumber="3" :choices="choices" :current="[this.currentSemester, this.currentPeriod]"></Semester>
+              <Semester @period-clicked="fillPool" @module-removed="removeModule" @info-clicked="showInfoCard" :semesterNumber="4" :choices="choices" :current="[this.currentSemester, this.currentPeriod]"></Semester>
+              <Semester @period-clicked="fillPool" @module-removed="removeModule" @info-clicked="showInfoCard" :semesterNumber="5" :choices="choices" :current="[this.currentSemester, this.currentPeriod]"></Semester>
           </div>
-          <ModulesPool
-              @module-clicked="matchModules"
-              @info-clicked="showInfoCard"
-              @next-period="fillPool"
-              :period="this.currentPeriod"
-              :semester="this.currentSemester"
-              :modules="this.modules" 
-              :physics="this.physics" 
-              :maths="this.maths" 
-              :biology="this.biology"
-              :neuroscience="this.neuroscience"
-              :chemistry="this.chemistry"
-              :interdisciplinary="this.interdisciplinary"
-              :practicals="this.practicals">
-            </ModulesPool>
+          <Transition name="bounce">
+            <ModulesPool
+                @module-clicked="matchModules"
+                @info-clicked="showInfoCard"
+                @next-period="fillPool"
+                :period="this.currentPeriod"
+                :semester="this.currentSemester"
+                :modules="this.modules"
+                :removedModules="this.removedModules"
+                :physics="this.physics" 
+                :maths="this.maths" 
+                :biology="this.biology"
+                :neuroscience="this.neuroscience"
+                :chemistry="this.chemistry"
+                :interdisciplinary="this.interdisciplinary"
+                :practicals="this.practicals">
+              </ModulesPool>
+          </Transition>
       </div>
       <div class="flex flex-col justify-center items-center h-wiki xl:hidden">
           <font-awesome-icon class="text-9xl opacity-50" icon="fa-solid fa-screwdriver-wrench" />
@@ -59,6 +62,7 @@ export default {
         return {
             modules: [],
             modules_copy: [],
+            removedModules: [],
             currentPeriod: 1,
             currentSemester: 1,
             canMakeChoice: true,
@@ -87,7 +91,6 @@ export default {
             .from('modules')
             .select()
             this.modules = modules
-            console.log(this.modules)
             this.modules.forEach(element => {
                 if (element.start1 != null) {
                 element.start1 = new Date(element.start1);
@@ -105,37 +108,15 @@ export default {
             this.modules_copy = this.modules
             this.fillPool(this.currentPeriod,this.currentSemester)
         },
-        async accessSupabase() {
-          let { data: modules, error } = await supabase
-            .from('modules')
-            .select()
-            this.modules = modules
-            console.log(this.modules)
-            this.modules.forEach(element => {
-                if (element.start1 != null) {
-                element.start1 = new Date(element.start1);
-                element.end1 = new Date(element.end1);
-                }
-                if (element.start2 != null) {
-                element.start2 = new Date(element.start2);
-                element.end2 = new Date(element.end2);
-                }
-                if (element.start3 != null) {
-                element.start3 = new Date(element.start3);
-                element.end3 = new Date(element.end3);
-                }
-            });
-            this.modules_copy = this.modules
-            this.fillPool(1,1)
-        },
         showInfoCard(s) {
-          console.log(s)
+          // console.log(s)
             this.infoModule = s
             this.showInfo = !this.showInfo
         },
         fillPool(periodNumber, semesterNumber) {
             this.currentPeriod = periodNumber
             this.currentSemester = semesterNumber
+            this.removedModules = []
             this.getNewPeriod(periodNumber)
             this.createSeparateModules(this.modules)
             this.canMakeChoice = true;
@@ -144,25 +125,32 @@ export default {
 
         async getNewPeriod(period) {
             this.modules = this.modules_copy.filter(module => module.period == period).map(module => ({...module}))
+            
+            var choiceNames = [];
+            var moduleNames = []
+            this.choices.forEach(choice => 
+            {choiceNames.push(choice.selectedModule.subject + choice.selectedModule.code)}
+            )
+            this.modules.forEach(module => 
+            {moduleNames.push(module.subject + module.code)}
+            )
 
-            // this removes a module contained in choices from the list of available modules in other periods as well
-            for(var i=0; i < this.modules.length; i++) {
-                for(var j=0; j < this.choices.length; j++) {
-                    if(this.modules[i].subject == this.choices[j].selectedModule.subject && this.modules[i].code == this.choices[j].selectedModule.code) {
-                        this.modules.splice(i,1)
-                    }
-                }
-            }
+            choiceNames.forEach(choice => {
+              if(moduleNames.indexOf(choice) !== -1) {
+                this.modules.splice(moduleNames.indexOf(choice),1)
+                moduleNames.splice(moduleNames.indexOf(choice),1)
+              }
+            })
         },
 
         createSeparateModules(modules) {
-            this.physics = modules.filter(module => module.subject == 'PHY')
-            this.maths = modules.filter(module => module.subject == 'MAT')
-            this.biology = modules.filter(module => module.subject == 'BIO')
-            this.neuroscience = modules.filter(module => module.subject == 'NEU')
-            this.chemistry = modules.filter(module => module.subject == 'CHE')
-            this.interdisciplinary = modules.filter(module => module.subject == 'INT')
-            this.practicals = modules.filter(module => module.subject == 'PRA')
+            this.physics = modules.filter(module => module.subject == 'PHY').sort((a,b) => a.code - b.code)
+            this.maths = modules.filter(module => module.subject == 'MAT').sort((a,b) => a.code - b.code)
+            this.biology = modules.filter(module => module.subject == 'BIO').sort((a,b) => a.code - b.code)
+            this.neuroscience = modules.filter(module => module.subject == 'NEU').sort((a,b) => a.code - b.code)
+            this.chemistry = modules.filter(module => module.subject == 'CHE').sort((a,b) => a.code - b.code)
+            this.interdisciplinary = modules.filter(module => module.subject == 'INT').sort((a,b) => a.code - b.code)
+            this.practicals = modules.filter(module => module.subject == 'PRA').sort((a,b) => a.code - b.code)
         },
 
         addChoice(selectedModule, semester, period) {
@@ -185,8 +173,10 @@ export default {
                     }
                 })
 
+            this.populateDeletedModules(period)
             // iterator corresponds to  the number of courses that have been selected
             if (iterator == 2) {
+                this.populateDeletedModules(period)
                 this.modules = this.modules.filter(course => course.subject == 'PRA')
                 this.createSeparateModules(this.modules)
             }
@@ -200,6 +190,26 @@ export default {
             //     })
             this.checkSelectedTwoCourses(c.semester, c.period)
             
+        },
+        populateDeletedModules(period) {
+            // gives the array of removed modules
+          this.removedModules = this.modules_copy.filter(module => module.period == period).map(module => ({...module}))
+
+          var removedNames = [];
+          var moduleNames = []
+          this.removedModules.forEach(rm => 
+          {removedNames.push(rm.subject + rm.code)}
+          )
+          this.modules.forEach(module => 
+          {moduleNames.push(module.subject + module.code)}
+          )
+
+          moduleNames.forEach(rm => {
+            if(removedNames.indexOf(rm) !== -1) {
+              this.removedModules.splice(removedNames.indexOf(rm),1)
+              removedNames.splice(removedNames.indexOf(rm),1)
+            }
+          })
         },
         handleSwitchPeriod(semesterNumber, periodNumber) {
 
@@ -276,14 +286,14 @@ TODO: refactor! the functions used for filtering can be extracted to improve rea
             this.modules = this.modules.filter(practicalInTheTable => this.filterPractical(selectedModule, practicalInTheTable, true))
           }
           this.createSeparateModules(this.modules)
-          console.log(this.modules)
+          // console.log(this.modules)
           
 
           if(add) {
             this.addChoice(selectedModule, semester, period);
           }
         
-        //   return this.modules
+          // return this.modules
         }
   },      
 //--------------------------------------------------------------------------------------------
@@ -348,11 +358,11 @@ TODO: refactor! the functions used for filtering can be extracted to improve rea
   durations and timing functions.
 */
 .slide-fade-enter-active {
-  transition: all 0.3s ease-out;
+  transition: all 0.2s ease-out;
 }
 
 .slide-fade-leave-active {
-  transition: all 0.3s ease-out;
+  transition: all 0.2s ease-out;
 }
 
 .slide-fade-enter-from,
