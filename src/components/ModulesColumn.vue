@@ -34,9 +34,9 @@
                             </button>
                         </div>
                         
-                                <h1 class="hidden group-hover:block fixed bg-white p-3 border border-gray-400 rounded-lg font-medium">
-                                    {{s.description.title}}
-                                </h1>
+                        <h1 class="hidden group-hover:block fixed bg-amber-50 p-3 border border-gray-400 rounded-lg font-medium">
+                            {{s.description.title}}
+                        </h1>
                     </div>
             </div>
         <div v-if="subject.length == 0 && title !== 'removed modules based on your selection so far'" class="h-full flex justify-center items-center flex-col">
