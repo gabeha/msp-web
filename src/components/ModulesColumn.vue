@@ -12,7 +12,7 @@
                                 :color == 'sky' ? 'border-teal-500'
                                 :color == 'purple' ? 'border-indigo-400'
                                 :color == 'gray' ? 'border-slate-500'
-                                :color == 'lightgray' ? 'border-slate-300 opacity-60'
+                                :color == 'lightgray' ? 'border-slate-300 opacity-90'
                                 : ''">
                             <button @click="moduleClicked(s)"
                             class="px-2 py-2 flex flex-col justify-center items-center font-medium">
@@ -20,7 +20,7 @@
                                     {{s.subject}}{{s.code}}
                                 </h4>
                             </button>
-                            <button @click="infoClicked(s)" class="rounded-r-full w-8 border border-white"
+                            <button @click="infoClicked(s)" class="rounded-r-full w-12 border border-white"
                             :class="color == 'blue' ? 'bg-sky-500' 
                                 :color == 'red' ? 'bg-red-400'
                                 :color == 'green' ? 'bg-green-500'
@@ -28,7 +28,7 @@
                                 :color == 'sky' ? 'bg-teal-500'
                                 :color == 'purple' ? 'bg-indigo-400'
                                 :color == 'gray' ? 'bg-slate-500'
-                                :color == 'lightgray' ? 'bg-slate-300 opacity-60'
+                                :color == 'lightgray' ? 'bg-slate-300 opacity-90'
                                 : ''">
                                 <font-awesome-icon class="text-white" icon="fa-solid fa-info"/>
                             </button>
