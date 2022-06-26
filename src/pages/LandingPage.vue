@@ -2,7 +2,7 @@
     <div class="container mx-auto ">
         <div class="flex flex-col justify-center items-center">
             <div class=" mt-8 px-4 flex flex-col justify-between h-max">
-                <h3 class="text-center font-serif font-medium leading-10 text-3xl md:text-6xl mt-0 mb-2 text-sky-600 ">Plan your curriculum with the MSP CourseBuilder</h3>
+                <h3 class="text-center font-serif font-medium leading-10 text-3xl md:text-6xl mt-0 mb-2 text-sky-600 ">Hokenjuuuuuu Plan your curriculum with the MSP CourseBuilder</h3>
                 <p class="text-center text-lg font-medium text-gray-600 mb-6 rounded-xl shadow-xl p-4 w-4/5 mx-auto md:shadow-none">
                     Developed by MSP students for MSP students, MSP CourseBuilder is the ultimate tool to plan out your schedule for your time at the Maastricht Science Programme.
                 </p>
