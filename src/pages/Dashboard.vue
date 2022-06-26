@@ -24,8 +24,9 @@
             <a class="col-span-1 text-base text-center font-bold text-sky-800">Period</a>
             <div v-for="(s, index) in sel" :key="index" class=" col-span-7 grid  gap-3 grid-cols-7 grid-flow-col">
                 <div class="col-span-5 text-start"><a class="font-bold">{{ s.selected.selectedModule.subject }}{{ s.selected.selectedModule.code }}:</a>  {{ s.selected.selectedModule.description.title }}</div>
-                <div class="col-span-1 text-center">{{s.selected.semester}}</div> 
-                <div class="col-span-1 text-center ">{{ s.selected.period }}</div>
+                <div class="col-span-1 text-center">{{ s.selected.semester }}</div> 
+                <div class="col-span-1 text-center ">{{ s.selected.period }} </div>
+                <button @click="removeChoice(s.id)">&times;</button>
             </div>
             <router-link to="/builder" class="my-5 col-span-7 bg-sky-800 rounded-full w-1/2 mx-auto text-center py-3 h-14 text-white font-bold">Continue selecting</router-link>
     </div>
@@ -127,8 +128,14 @@ export default {
                     }
                 }
             })
-        
-
+        },
+        async removeChoice(id) {
+            let { data: selection, error } = await supabase
+                .from('selection')
+                .delete()
+                .eq('id', id)
+            this.sel = selection
+            this.fetchSelected()
         },
     }
 

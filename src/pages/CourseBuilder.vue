@@ -50,7 +50,7 @@ import useSupabase from "../composables/UseSupabase";
 const { supabase } = useSupabase()
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
-
+import  useAuthUser from '../composables/UseAuthUser.js';
 const moment = extendMoment(Moment);
 
 
@@ -76,15 +76,21 @@ export default {
             chemistry: [],
             interdisciplinary: [],
             practicals: [],
-
             choices: []
         }
     },
     mounted() {
-        this.fetchAllModules()
+      this.fetchAllModules(),
+      this.fetchSelected()
     },
     computed() {
 
+  },
+    setup() {
+        const { user } = useAuthUser()
+        return {
+            user
+        }
     },
     methods: {
         async fetchAllModules() {
@@ -161,9 +167,38 @@ export default {
                 period
             };
             this.choices.push(choice)
+          
             this.checkSelectedTwoCourses(semester, period);
+            this.addtoacc(choice)
         },
+        async addtoacc(c) {
+        try {
+          const { data, error } = await supabase
+              .from('selection')
+              .upsert([
+              { 'id_student': this.user.id, 'selected': c}])
 
+          if (error) {
+            alert(error.message)
+          return null
+         }
+          return data
+        } catch (err) {
+          alert('error')
+          return null
+        }
+      },
+       async fetchSelected() {
+            let { data: selection, error } = await supabase
+                .from('selection')
+                .select()
+                .eq('id_student', this.user.id)
+      
+           this.choices = selection
+          
+         
+        },
+    
         checkSelectedTwoCourses(semester, period) {
             var iterator = 0;
             // var iterators = [2,4,6,8,10,12,14,16,18,20]
