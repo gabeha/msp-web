@@ -84,9 +84,6 @@ export default {
       this.fetchAllModules(),
       this.fetchSelected()
     },
-    computed() {
-
-  },
     setup() {
         const { user } = useAuthUser()
         return {
@@ -167,22 +164,27 @@ export default {
                 semester,
                 period
             };
-        this.checkSelectedTwoCourses(semester, period);
+        
           if (!this.user) {
             this.choices.push(choice)
-            console.log('fuck you')
+            this.checkSelectedTwoCourses(semester, period);
+            console.log('not logged in')
           } else {
+            this.choices.push(choice)
             this.addtoacc(selectedModule, semester, period)
-            console.log('ýay')
+            this.checkSelectedTwoCourses(semester, period);
+            console.log('logged in')
           }
         },
+
         async addtoacc(sm, sem, per) {
         try {
           const { data, error } = await supabase
               .from('selection_duplicate')
               .upsert([
               { 'id_student': this.user.id, 'selectedModule': sm, 'semester': sem, 'period': per}])
-          this.fetchSelected()
+              // whenever period is switched, call this function, deletion doesnt need to be an api call
+          this.fetchSelected() //can be refactored
           if (error) {
             alert(error.message)
           return null
@@ -202,13 +204,10 @@ export default {
             .eq('id_student', this.user.id)
 
           this.choices = selection
-        } else {
+        } 
+        else {
           // nothing
         }
-       
-         
-          
-         
         },
     
         checkSelectedTwoCourses(semester, period) {
@@ -232,6 +231,8 @@ export default {
         },
         removeModule(c) {
               this.choices = this.choices.filter(choice => choice.selectedModule.id !== c.selectedModule.id)
+
+              // refactor
           if (this.user) {
             this.removeChoice(c.id)
           } else {
@@ -288,6 +289,7 @@ export default {
                 .from('selection_duplicate')
                 .delete()
                 .eq('id', id)
+                // the id here is the selection_duplicate_id
         this.fetchSelected()
             
         },

@@ -54,7 +54,7 @@
                                 <h3 class="text-left font-medium leading-tight text-lg md:text-xl mt-0 ml-4 text-gray-600">Designer</h3>
                             </div>
                         </div>
-                        <p class="font-medium text-sm mx-auto text-justify mt-2">"When choosing my courses at MSP, especially the first few times, it was a difficult task and a bit of a brain teaser. I had to try different combinations on paper and keep in mind so many details that I was simply lost. Being able to have an overview of all my choices on a single screen while making choices for the upcoming semester would have saved me so much time."</p>
+                        <p class="font-medium font-serif text-sm mx-auto text-justify mt-2">"When choosing my courses at MSP, especially the first few times, it was a difficult task and a bit of a brain teaser. I had to try different combinations on paper and keep in mind so many details that I was simply lost. Being able to have an overview of all my choices on a single screen while making choices for the upcoming semester would have saved me so much time."</p>
                     </div>
                     <div class="flex flex-col justify-start shadow-xl rounded-lg p-6 mx-3">
                         <div class="flex items-center">
@@ -64,7 +64,7 @@
                                 <h3 class="text-left font-medium leading-tight text-lg md:text-xl mt-0 ml-4 text-gray-600">Lead Software Engineer</h3>
                             </div>
                         </div>
-                        <p class="font-medium text-sm mx-auto text-justify mt-2">"When choosing my courses at MSP, especially the first few times, it was a difficult task and a bit of a brain teaser. I had to try different combinations on paper and keep in mind so many details that I was simply lost. Being able to have an overview of all my choices on a single screen while making choices for the upcoming semester would have saved me so much time."</p>
+                        <p class="font-medium font-serif text-sm mx-auto text-justify mt-2">"The idea to re-invent the process of course selection really came from a need rather than a wish. What we have come up with so far is a lot more than I would have imagined at the start of this project. I am grateful to have had the opportunity to lead such an ambitious group of students while realizing such an incredible tool."</p>
                     </div>
                     <div class="hidden md:flex flex-col justify-start shadow-xl rounded-lg p-6 mx-3">
                         <div class="flex items-center">
@@ -74,7 +74,7 @@
                                 <h3 class="text-left font-medium leading-tight text-lg md:text-xl mt-0 ml-4 text-gray-600">Designer</h3>
                             </div>
                         </div>
-                        <p class="font-medium text-sm mx-auto text-justify mt-2">"When choosing my courses at MSP, especially the first few times, it was a difficult task and a bit of a brain teaser. I had to try different combinations on paper and keep in mind so many details that I was simply lost. Being able to have an overview of all my choices on a single screen while making choices for the upcoming semester would have saved me so much time."</p>
+                        <p class="font-medium font-serif text-sm mx-auto text-justify mt-2">"The Course Selection Process has always been a tedious part of MSP. Finding the right courses with the right timeslots that would fit your Curriculum could sometimes take hours. With this tool planning your Semester or Curriculum becomes a matter of minutes in a clean and clearly arranged environment. I think we revolutionized the process for future MSP cohorts."</p>
                     </div>
                     
                 </div>
