@@ -1,6 +1,6 @@
 <template>
     <div v-if="infoModule !== null" class="flex flex-col justify-start items-start absolute top-20 right-0 w-1/4 bg-white p-6 border border-gray-600 rounded-lg h-info m-4 overflow-auto">
-        <font-awesome-icon @click="closeInfoCard" class="text-gray-800 bg-red-400 px-2 py-1 rounded-md" icon="fa-solid fa-xmark" />
+        <font-awesome-icon @click="closeInfoCard" class="text-gray-800 bg-white px-2 py-1 fixed rounded-md" icon="fa-solid fa-xmark" />
         <div class="flex flex-col text-center w-full">
             <h1 class="font-medium leading-tight text-3xl mt-2 mb-2 text-gray-600">{{infoModule.description.title}}</h1>
             <h4 class="font-thin leading-tight text-xl mt-0 mb-4 text-gray-600">{{infoModule.subject}}{{infoModule.code}}</h4>
