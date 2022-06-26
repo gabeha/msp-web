@@ -41,7 +41,7 @@ export default {
     props: {
         periodNumber: Number,
         semester: Number,
-        choices: Array,
+        choices: Object,
         current: Array
     },
     data() {

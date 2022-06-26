@@ -23,9 +23,9 @@
             <a class="col-span-1 text-base text-center font-bold text-sky-800">Semester</a>
             <a class="col-span-1 text-base text-center font-bold text-sky-800">Period</a>
             <div v-for="(s, index) in sel" :key="index" class=" col-span-7 grid  gap-3 grid-cols-7 grid-flow-col">
-                <div class="col-span-5 text-start"><a class="font-bold">{{ s.selected.selectedModule.subject }}{{ s.selected.selectedModule.code }}:</a>  {{ s.selected.selectedModule.description.title }}</div>
-                <div class="col-span-1 text-center">{{ s.selected.semester }}</div> 
-                <div class="col-span-1 text-center ">{{ s.selected.period }} </div>
+                <div class="col-span-5 text-start"><a class="font-bold">{{ s.selectedModule.subject }}{{ s.selectedModule.code }}:</a>  {{ s.selectedModule.description.title }}</div>
+                <div class="col-span-1 text-center">{{ s.semester }}</div> 
+                <div class="col-span-1 text-center ">{{ s.period }} </div>
                 <button @click="removeChoice(s.id)">&times;</button>
             </div>
             <router-link to="/builder" class="my-5 col-span-7 bg-sky-800 rounded-full w-1/2 mx-auto text-center py-3 h-14 text-white font-bold">Continue selecting</router-link>
@@ -87,7 +87,7 @@ export default {
     methods: {
         async fetchSelected() {
             let { data: selection, error } = await supabase
-                .from('selection')
+                .from('selection_duplicate')
                 .select()
                 .eq('id_student', this.user.id)
             this.sel = selection
@@ -95,33 +95,33 @@ export default {
         },
         tracker() {
             this.sel.forEach(selection => {
-                if (selection.selected.selectedModule.subject == "MAT") {
+                if (selection.selectedModule.subject == "MAT") {
                     this.math++
-                } else if (selection.selected.selectedModule.subject == "INT") {
-                    if (selection.selected.selectedModule.code == 3001) {
+                } else if (selection.selectedModule.subject == "INT") {
+                    if (selection.selectedModule.code == 3001) {
                         this.las++
                         this.advanced++
-                    } else if (selection.selected.selectedModule.code == 2007) {
+                    } else if (selection.selectedModule.code == 2007) {
                         this.las++
-                    } else if (selection.selected.selectedModule.code > 3000) {
+                    } else if (selection.selectedModule.code > 3000) {
                         this.advanced++
-                    } else if (selection.selected.selectedModule.code < 2000) {
+                    } else if (selection.selectedModule.code < 2000) {
                         this.introduction++
                     } else {
                         // nothing
                     }
-                } else if (selection.selected.selectedModule.subject == "PRA") {
-                    if (selection.selected.selectedModule.code > 3000) {
+                } else if (selection.selectedModule.subject == "PRA") {
+                    if (selection.selectedModule.code > 3000) {
                         this.advancedPractical++
-                    } else if (selection.selected.selectedModule.code < 2000) {
+                    } else if (selection.selectedModule.code < 2000) {
                         this.introductionPractical++
                     } else {
                         // nothing
                     }
                 } else {
-                    if (selection.selected.selectedModule.code > 3000) {
+                    if (selection.selectedModule.code > 3000) {
                         this.advanced++
-                    } else if (selection.selected.selectedModule.code < 2000) {
+                    } else if (selection.selectedModule.code < 2000) {
                         this.introduction++
                     } else {
                         // nothing
@@ -131,7 +131,7 @@ export default {
         },
         async removeChoice(id) {
             let { data: selection, error } = await supabase
-                .from('selection')
+                .from('selection_duplicate')
                 .delete()
                 .eq('id', id)
             this.sel = selection

@@ -76,7 +76,8 @@ export default {
             chemistry: [],
             interdisciplinary: [],
             practicals: [],
-            choices: []
+            choices: [],
+            select: []
         }
     },
     mounted() {
@@ -166,18 +167,22 @@ export default {
                 semester,
                 period
             };
+        this.checkSelectedTwoCourses(semester, period);
+          if (!this.user) {
             this.choices.push(choice)
-          
-            this.checkSelectedTwoCourses(semester, period);
-            this.addtoacc(choice)
+            console.log('fuck you')
+          } else {
+            this.addtoacc(selectedModule, semester, period)
+            console.log('ýay')
+          }
         },
-        async addtoacc(c) {
+        async addtoacc(sm, sem, per) {
         try {
           const { data, error } = await supabase
-              .from('selection')
+              .from('selection_duplicate')
               .upsert([
-              { 'id_student': this.user.id, 'selected': c}])
-
+              { 'id_student': this.user.id, 'selectedModule': sm, 'semester': sem, 'period': per}])
+          this.fetchSelected()
           if (error) {
             alert(error.message)
           return null
@@ -186,15 +191,22 @@ export default {
         } catch (err) {
           alert('error')
           return null
-        }
+          }
+        
       },
-       async fetchSelected() {
-            let { data: selection, error } = await supabase
-                .from('selection')
-                .select()
-                .eq('id_student', this.user.id)
-      
-           this.choices = selection
+      async fetchSelected() {
+        if (this.user) {
+          let { data: selection, error } = await supabase
+            .from('selection_duplicate')
+            .select()
+            .eq('id_student', this.user.id)
+
+          this.choices = selection
+        } else {
+          // nothing
+        }
+       
+         
           
          
         },
@@ -219,8 +231,14 @@ export default {
 
         },
         removeModule(c) {
-            this.choices = this.choices.filter(choice => choice.selectedModule.id !== c.selectedModule.id)
-            this.fillPool(c.period, c.semester)
+              this.choices = this.choices.filter(choice => choice.selectedModule.id !== c.selectedModule.id)
+          if (this.user) {
+            this.removeChoice(c.id)
+          } else {
+            // nothing
+          }
+             this.fillPool(c.period, c.semester)
+            
             // this.choices.forEach(element => {
             //   this.matchModules(element.selectedModule, element.semester, element.period, false)
             //     })
@@ -262,6 +280,15 @@ export default {
                     this.checkSelectedTwoCourses(semesterNumber, periodNumber)
                 })
             }
+            
+      },
+
+        async removeChoice(id) {
+            let { data: selection, error } = await supabase
+                .from('selection_duplicate')
+                .delete()
+                .eq('id', id)
+        this.fetchSelected()
             
         },
 /*
