@@ -34,6 +34,7 @@ const handleSubmit = async () => {
 }
 </script>
 <template>
+<div class="container min-h-wiki">
 <div class="w-1/3 mt-10 border-2 mx-auto ">
     <button @click="signup=!signup" class="text-3xl p-4 border-2 w-1/2" :class="signup?  'bg-sky-700 border-b-2 text-white ': 'bg-white'">Log in</button>
     <button  @click="signup=!signup" class="text-3xl p-4 border-2 w-1/2" :class="!signup? 'bg-sky-700 border-b-2 text-white ': 'bg-white'">Sign up</button>
@@ -58,6 +59,7 @@ const handleSubmit = async () => {
     <button class="w-full h-24 bg-sky-700 text-white text-xl mt-10 text-bold">Register></button>
     </form>
 </div>   
+</div>
 </template>
 <script>
 export default {
