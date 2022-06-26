@@ -66,7 +66,7 @@
             </div>
         </div>
     </div>
-    <section class="bg-sky-900 mt-12 w-screen">
+    <section class="bg-sky-900 mt-12 w-full">
     <div class="flex flex-col items-center justify-between px-6 py-10 space-y-12 md:py-10 md:flex-row md:space-y-0">
         <h2 class="text-4xl font-bold leading-tight text-center text-white md:max-w-xl md:text-left">
         Plan your curriculum today
