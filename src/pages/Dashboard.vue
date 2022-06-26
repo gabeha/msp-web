@@ -4,7 +4,7 @@ const { user } = useAuthUser()
 </script>
 
 <template>
-    <div class="container lg:flex-row items-center px-6 mx-auto mt-1 space-y-0 md:space-y-0">
+    <div class="container min-h-wiki lg:flex-row items-center px-6 mx-auto mt-1 space-y-0 md:space-y-0">
    <h1 class="text-5xl mb-16">Welcome {{ user.user_metadata.name }}</h1>
    <div class="grid grid-cols-4 w-full mx-auto gap-5">
     <div class="col-span-1 row-span-2 rounded-xl text-center p-5  bg-sky-800 w-full h-96">
