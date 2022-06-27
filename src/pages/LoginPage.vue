@@ -39,7 +39,7 @@ const handleSubmit = async () => {
 
 <!-- remove this to make modal -->
 <div class="min-h-wiki flex justify-center items-center bg-login bg-contain bg-center bg-no-repeat"> 
-    <div class="w-1/5 bg-white mx-auto p-8 rounded-lg flex flex-col justify-center items-center shadow-2xl border-2 border-gray-300">
+    <div class="md:w-1/5 bg-white mx-auto p-8 rounded-lg flex flex-col justify-center items-center shadow-2xl border-2 border-gray-300">
         <div class="inline-flex rounded-md shadow-sm mb-4" role="group">
             <button @click="toggle('login')" type="button"  class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg border border-gray-200 hover:bg-gray-100 hover:text-sky-700 focus:z-10 focus:ring-2 focus:ring-sky-700 focus:text-sky-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-sky-500 dark:focus:text-white">
                 Log in
