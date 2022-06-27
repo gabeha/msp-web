@@ -15,7 +15,7 @@
             <div class="text-center mt-10 px-4 flex flex-col justify-between h-max">
                 <h3 class="font-medium font-serif leading-tight text-2xl md:text-4xl mt-0 mb-2 text-sky-600">Why you should use MSP CourseBuilder</h3>
                 <div class="px-3 mt-4">
-                    <ol class="relative border-l border-gray-200 dark:border-gray-700">                  
+                    <ol class="relative border-l border-gray-200 dark:border-gray-700 -z-20">                  
                         <li class="mb-10 ml-7">            
                             <span class="flex absolute -left-3 md:-left-5 justify-center items-center w-6 md:w-10 h-6 md:h-10 bg-blue-200 rounded-full dark:ring-gray-900 dark:bg-blue-900">
                                 <font-awesome-icon icon="fa-solid fa-graduation-cap" class="w-3 md:w-6 h-3 md:h-6 text-blue-600 dark:text-blue-400"/>

@@ -1,14 +1,10 @@
-<script setup>
-import  useAuthUser from '../composables/UseAuthUser.js';
-const { user } = useAuthUser()
-</script>
-
 <template>
-<nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 border-b">
-  <div class="container flex flex-wrap justify-between items-center mx-auto">
+<div class="h-[60px] lg:h-[73px] w-full bg-white ">
+<nav class=" fixed top-0 left-0 w-full bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 border-b">
+  <div class="sm:container flex flex-wrap justify-between items-center mx-auto bg-white">
   <router-link to="/">
       <!-- <img src="/favicon.ico" class="mr-3 h-6 sm:h-9" alt="Logo" /> -->
-      <span class="pr-4 pl-3 text-2xl font-medium whitespace-nowrap dark:text-white font-mono">MSP Course Builder</span>
+      <span class="pr-4 pl-3 text-xl sm:text-2xl font-medium whitespace-nowrap dark:text-white font-mono">MSP Course Builder</span>
   </router-link>
   <div class="flex lg:order-1">
       <button @click="toggleHidden()" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 " >
@@ -18,7 +14,7 @@ const { user } = useAuthUser()
     </button>
   </div>
   <div class="hidden justify-between items-center w-full max-h-max lg:flex lg:w-auto lg:order-1" id="mobile-menu-4">
-    <ul class="flex flex-col mt-4 text-xl justify-center items-center lg:flex-row lg:space-x-8 lg:mt-0 lg:text-xl lg:font-semibold">
+    <ul class="flex flex-col mt-[46px] text-xl justify-center items-center lg:flex-row lg:space-x-8 lg:mt-0 lg:text-xl lg:font-semibold">
       <li>
         <router-link @click="toggleHidden()" to="/" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 lg:hover:text-sky-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Home</router-link>
       </li>
@@ -33,22 +29,15 @@ const { user } = useAuthUser()
         <router-link @click="toggleHidden()" to="/about" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About Us</router-link>
       </li>
       <li>
-        <router-link @click="toggleHidden()" to="/dashboard" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Dashboard</router-link>
-      </li>
-      <li v-if="!user">
-        <router-link to="/login" class="block mx-auto my-2">
-            <Button @btn-click="toggleHidden()" name="Login"></Button>
-        </router-link>
-      </li>
-      <li v-else>
-        <router-link to="/logout" class="block mx-auto my-2">
-          <Button @btn-click="toggleHidden()" name="Logout"></Button>
+        <router-link to="/" class="block mx-auto my-2">
+            <Button @btn-click="toggleHidden()" name="Get Started"></Button>
         </router-link>
       </li>
     </ul>
   </div>
 </div>
 </nav>
+</div>
 </template>
 
 <script>
