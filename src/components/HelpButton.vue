@@ -30,7 +30,7 @@
                         From the course selection, click on a course or practical that you would like to take. 
                     </li>
                     <li>
-                        Click on the <span class="font-bold text-amber-600 border-2 border-amber-600 px-2 rounded-full ">i</span> next to the course or practical to get a short overview. The 'read more' button will direct you to the <router-link to="/wiki" class="font-bold text-amber-600">Course Wiki</router-link> for more information.
+                        Click on the <span class="font-bold text-amber-600 border-2 border-amber-600 px-2 rounded-full ">i</span> next to the course or practical to get a short overview. The <span class="font-bold">read more</span> button will direct you to the <router-link to="/wiki" class="font-bold text-amber-600">Course Wiki</router-link> for more information.
                     </li>
                     <li>
                         After you have selected a module, the remaining options of courses and practical will be displayed.

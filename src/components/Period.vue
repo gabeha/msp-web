@@ -1,6 +1,6 @@
 <template>
     <div class="cursor-pointer flex flex-col text-center items-center min-h-period rounded-lg border shadow-md p-3 bg-white bg-opacity-80" :class="this.current[0] == this.semester && this.current[1] == this.periodNumber ? 'border-amber-500 border-2 shadow-inner' : ''">
-        <h5 @click="emitPeriod" class="select-none font-medium leading-tight text-lg mt-0 mb-2 text-gray-600 rounded-xl border border-gray-300 px-3 pb-1.5 pt-1 hover:bg-slate-200">Period {{periodNumber}}</h5>
+        <h5 @click="emitPeriod" class="select-none font-medium leading-tight text-lg mt-0 mb-2 text-gray-600 rounded-xl border border-gray-300 px-3 pb-1.5 pt-1 bg-slate-200 hover:bg-slate-300">Period {{periodNumber}}</h5>
         <div v-if="choices !== undefined">
             <div v-for="c in choices.filter(choice => (choice.semester == this.semester && choice.period == this.periodNumber))" :key="c.selectedModule.id" class="flex flex-col justify-between">
                     <div class="rounded-full border-2 flex justify-between m-1 w-5/6 mx-auto"
