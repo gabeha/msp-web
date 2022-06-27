@@ -4,7 +4,7 @@ const { user } = useAuthUser()
 </script>
 
 <template>
-<nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 border-b">
+<nav class=" border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 border-b">
   <div class="container flex flex-wrap justify-between items-center mx-auto">
   <router-link to="/">
       <!-- <img src="/favicon.ico" class="mr-3 h-6 sm:h-9" alt="Logo" /> -->

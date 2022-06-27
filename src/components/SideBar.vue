@@ -41,6 +41,12 @@ export default {
         interdisciplinary: Array,
         practicals: Array
     },
+    mounted() {
+      // if(this.physics !== []) {
+
+      //    console.log(this.physics)
+      // }
+    },
     methods: {
         passOn(id) {
             this.$emit('course-clicked', id)

@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col justify-start items-center bg-white border border-gray-300 p-3 rounded-lg shadow-sm min-h-card">
+    <div class="flex flex-col justify-start items-center bg-white bg-opacity-80 border border-gray-300 p-3 rounded-lg shadow-sm min-h-card">
         <h4 class="font-semibold text-center leading-tight text-xl mt-0 mb-4 text-gray-700 capitalize">{{title}}</h4>
         
             <div v-if="subject !== undefined" :class="title == 'practicals' ? 'grid grid-cols-10 w-full' :title == 'removed modules based on your selection so far' ? 'grid grid-cols-10 w-full' : 'grid grid-cols-3 w-full'">
@@ -12,7 +12,7 @@
                                 :color == 'sky' ? 'border-teal-500'
                                 :color == 'purple' ? 'border-indigo-400'
                                 :color == 'gray' ? 'border-slate-500'
-                                :color == 'lightgray' ? 'border-slate-300 opacity-90'
+                                :color == 'lightgray' ? 'border-slate-300'
                                 : ''">
                             <button @click="moduleClicked(s)"
                             class="px-2 py-2 flex flex-col justify-center items-center font-medium">
@@ -28,7 +28,7 @@
                                 :color == 'sky' ? 'bg-teal-500'
                                 :color == 'purple' ? 'bg-indigo-400'
                                 :color == 'gray' ? 'bg-slate-500'
-                                :color == 'lightgray' ? 'bg-slate-300 opacity-90'
+                                :color == 'lightgray' ? 'bg-slate-300'
                                 : ''">
                                 <font-awesome-icon class="text-white" icon="fa-solid fa-info"/>
                             </button>

@@ -1,52 +1,138 @@
 
 <template>
-    <div class="container min-h-wiki lg:flex-row items-center px-6 mx-auto mt-1 space-y-0 md:space-y-0">
-  <div class="my-5 grid grid-cols-2">
-  <a class="text-5xl mr-5 font-bold text-sky-800 col-start-1 col-span-1 ">Dashboard</a>
-  <a class="text-3xl col-start-1">Welcome {{ user.user_metadata.name }}</a>
-  </div> 
-   <div class="grid mt-10 grid-cols-6  w-full mx-auto gap-5 grid-flow-row-dense">
-    <div class="col-span-3  rounded-xl shadow-md  p-5  text-sky-800 bg-sky-800 w-full">
-        <a class="text-white text-2xl text-center block w-full font-bold"> TRACKER </a>
-        <a class="text-white text-sm text-center w-full"> Your progress, based on your current selection</a>
-        <div class="w-full bg-white my-3 h-10 px-4 py-2 rounded-3xl" ><a class="tracking-tighter float-left ">Math courses:</a> <a class="float-right font-light tracking-tighter">{{ math }} / min 1</a></div>
-        <div class="w-full bg-white my-3 h-10 px-4 py-2 rounded-3xl" ><a class="tracking-tighter float-left ">LAS courses:</a> <a class="float-right font-light tracking-tighter">{{ las }} / min 1</a></div>
-        <div class="w-full bg-white my-3 h-10 px-4 py-2 rounded-3xl" ><a class="tracking-tighter float-left ">Introductory Level courses:</a> <a class="float-right font-light tracking-tighter">{{ introduction }} / max 4</a></div>
-        <div class="w-full bg-white my-3 h-10 px-4 py-2 rounded-3xl" ><a class="tracking-tighter float-left ">Introductory Level practicals:</a> <a class="float-right font-light tracking-tighter">{{ introductionPractical }} / max 2</a></div>
-        <div class="w-full bg-white my-3 h-10 px-4 py-2 rounded-3xl" ><a class="tracking-tighter float-left ">Advanced Level courses:</a> <a class="float-right font-light tracking-tighter">{{ advanced }} / min 4</a></div>
-        <div class="w-full bg-white my-3 h-10 px-4 py-2 rounded-3xl" ><a class="tracking-tighter float-left ">Advanced Level Practicals:</a> <a class="float-right font-light tracking-tighter">{{ advancedPractical }} / min 2</a></div>
-    </div>
-        
-    <div class="col-span-3 border-4 shadow-md row-span-2 rounded-xl w-full grid grid-cols-7 p-5  h-fit">
-        <a class="text-sky-800 text-center col-span-7 text-2xl  w-full font-bold"> YOUR CHOICES </a>
-            <a class="col-span-5 text-2xl font-bold text-sky-800 my-2">Module</a>
-            <a class="col-span-1 text-base text-center font-bold text-sky-800">Semester</a>
-            <a class="col-span-1 text-base text-center font-bold text-sky-800">Period</a>
-            <div v-for="(s, index) in sel" :key="index" class=" col-span-7 grid  gap-3 grid-cols-7 grid-flow-col">
-                <div class="col-span-5 text-start"><a class="font-bold">{{ s.selectedModule.subject }}{{ s.selectedModule.code }}:</a>  {{ s.selectedModule.description.title }}</div>
-                <div class="col-span-1 text-center">{{ s.semester }}</div> 
-                <div class="col-span-1 text-center ">{{ s.period }} </div>
-                <button @click="removeChoice(s.id)">&times;</button>
+<div class="container min-h-wiki mx-auto">
+    <div class="flex justify-between mt-4">
+        <h1 class="font-normal leading-tight text-5xl mt-0 mb-2 text-sky-600">Welcome {{ user.user_metadata.name }}</h1>
+        <div class="flex justify-center items-center p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800" role="alert">
+            <svg class="inline flex-shrink-0 mr-3 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+            <div class="flex flex-col items-center">
+                <span class="font-medium">Next Registration Deadline</span> Friday 18 November 2022
             </div>
-            <router-link to="/builder" class="my-5 col-span-7 bg-sky-800 rounded-full w-1/2 mx-auto text-center py-3 h-14 text-white font-bold">Continue selecting</router-link>
+        </div>
     </div>
-    <div class="col-span-2 border-4 shadow-md grid grid-cols-1 rounded-xl w=3/4 p-5 h-full">
-        <a class="text-sky-800 text-center text-2xl mb-4 block w-full font-bold"> YOUR PROFILE </a>
-              <div class="w-full"><a class="text-xl  font-bold">Name:</a><a class="float-right" >{{ user.user_metadata.name }}</a></div>
-              <div class="w-full"><a class="text-xl  font-bold">E-mail:</a><a class="float-right" >{{ user.email }}</a></div>
-            <div class="w-full"> <a class="text-xl font-bold ">Id: </a><a class="float-right" >{{ user.id }}</a></div>
-            <div class="w-full"> <a class="text-xl font-bold ">Role: </a><a class="float-right" >{{ user.role }}</a></div>
-            <router-link to="/logout" class="my-5 bg-sky-800 text-center py-1 rounded-full w-1/2 mx-auto h-10 text-white font-bold">Sign Out</router-link>
+    <div class="grid grid-cols-3 gap-8">
+        <div class="col-span-2">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-medium leading-tight text-3xl mt-0 text-sky-600">Your Courses</h3>
+                <router-link to="/builder">
+                    <Button name="Continue Selecting"></Button>
+                </router-link>
+            </div>
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg max-h-pool w-full">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400 mt-0 w-full">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Module
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Semester
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Period
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Edit
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody v-for="(s, index) in sel" :key="index" class="overflow-y-auto w-full">
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <th scope="row" class="px-6 py-4 w-2/4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                <div class="mr-2 font-semibold tracking-wider text-xs py-0.5 px-1 rounded w-max" 
+                                :class="s.selectedModule.subject == 'PHY' ? 'bg-blue-100 text-blue-800' 
+                                :s.selectedModule.subject == 'MAT' ? 'bg-red-100 text-red-800'
+                                :s.selectedModule.subject == 'BIO' ? 'bg-green-100 text-green-800'
+                                :s.selectedModule.subject == 'NEU' ? 'bg-rose-100 text-rose-800'
+                                :s.selectedModule.subject == 'CHE' ? 'bg-teal-100 text-teal-800'
+                                :s.selectedModule.subject == 'INT' ? 'bg-indigo-100 text-indigo-800'
+                                :s.selectedModule.subject == 'PRA' ? 'bg-slate-100 text-slate-800'
+                                : ''">
+                                    {{s.selectedModule.subject}}{{s.selectedModule.code}}
+                                </div>
+                                 <span class="text-md">
+                                    {{ s.selectedModule.description.title }}
+                                 </span>
+                            </th>
+                            <td class="font-medium px-6 py-4 w-1/4">
+                                {{ s.semester }}
+                            </td>
+                            <td class="font-medium px-6 py-4 w-1/4">
+                                {{ s.period }}
+                            </td>
+                            <td class="px-6 py-4 text-right w-1/4">
+                                <button @click="removeChoice(s.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div>
+            <h3 class="font-medium leading-tight text-3xl mt-0 mb-4 text-sky-600">Your Progress</h3>
+            <div class="flex flex-col">
+                <div class="my-4">    
+                    <div class="flex justify-between mb-1">
+                    <span class="text-base font-medium text-red-500 dark:text-white">Maths Courses</span>
+                    <span class="text-sm font-medium text-red-500 dark:text-white">{{(this.math/1)*100 > 100 ? 100 : (this.math/1)*100}}%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                    <div class="bg-red-400 h-2.5 rounded-full max-w-full" :style="{width: (this.math/1)*100 +'%'}"></div>
+                    </div>
+                </div>
+                <div class="my-4">    
+                    <div class="flex justify-between mb-1">
+                    <span class="text-base font-medium text-indigo-500 dark:text-white">Liberal Arts & Science Courses</span>
+                    <span class="text-sm font-medium text-indigo-500 dark:text-white">{{(this.las/1)*100 > 100 ? 100 : (this.las/1)*100}}%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                    <div class="bg-indigo-400 h-2.5 rounded-full max-w-full" :style="{width: (this.las/1)*100 +'%'}"></div>
+                    </div>
+                </div>
+                <div class="my-4">    
+                    <div class="flex justify-between mb-1">
+                    <span class="text-base font-medium text-purple-500 dark:text-white">Introductory Level Courses</span>
+                    <span class="text-sm font-medium text-purple-500 dark:text-white">{{(this.introduction/4)*100 > 100 ? 100 : (this.introduction/4)*100}}%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                    <div class="bg-purple-400 h-2.5 rounded-full max-w-full" :style="{width: (this.introduction/4)*100 +'%'}"></div>
+                    </div>
+                </div>
+                <div class="my-4">    
+                    <div class="flex justify-between mb-1">
+                    <span class="text-base font-medium text-pink-500 dark:text-white">Introductory Level Practicals</span>
+                    <span class="text-sm font-medium text-pink-500 dark:text-white">{{(this.introductionPractical/2)*100 > 100 ? 100 : (this.introductionPractical/2)*100}}%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                    <div class="bg-pink-400 h-2.5 rounded-full max-w-full" :style="{width: (this.introductionPractical/2)*100 +'%'}"></div>
+                    </div>
+                </div>
+                <div class="my-4">    
+                    <div class="flex justify-between mb-1">
+                    <span class="text-base font-medium text-orange-500 dark:text-white">Advanced 3000 Level Courses</span>
+                    <span class="text-sm font-medium text-orange-500 dark:text-white">{{(this.advanced/4)*100 > 100 ? 100 : (this.advanced/4)*100}}%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                    <div class="bg-orange-400 h-2.5 rounded-full max-w-full" :style="{width: (this.advanced/4)*100 +'%'}"></div>
+                    </div>
+                </div>
+                <div class="my-4">    
+                    <div class="flex justify-between mb-1">
+                    <span class="text-base font-medium text-gray-500 dark:text-white">Advanced 3000 Level Courses</span>
+                    <span class="text-sm font-medium text-gray-500 dark:text-white">{{(this.advancedPractical/2)*100 > 100 ? 100 : (this.advancedPractical/2)*100}}%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                    <div class="bg-gray-400 h-2.5 rounded-full max-w-full" :style="{width: (this.advancedPractical/2)*100 +'%'}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <div class="col-span-1 border-2 shadow-md grid grid-cols-1 bg-sky-800 rounded-xl w=3/4 p-5 h-full">
-        <a class="text-white text-center text-2xl mb-4 block w-full font-bold"> NEXT REGISTRATION DEADLINE: </a>
-        <a class="text-white text-center text-2xl mb-4 block w-full font-bold"> Friday 18 November 2022</a>
-        
-    </div>
-    
-   </div>
-   </div> 
+</div>
 </template>
+
 <script>
 import router from '../router.js'
 import { ref } from 'vue'
@@ -57,8 +143,8 @@ import  useAuthUser from '../composables/UseAuthUser.js';
 export default {
     name: 'Dashboard',
     components: {
-
-    },
+    
+},
     data() {
         return {
             credits: 60,
@@ -97,32 +183,30 @@ export default {
             this.sel.forEach(selection => {
                 if (selection.selectedModule.subject == "MAT") {
                     this.math++
-                } else if (selection.selectedModule.subject == "INT") {
+                    if (selection.selectedModule.code < 2000) {
+                        this.introduction++
+                    }
+                } 
+                else if (selection.selectedModule.subject == "INT") {
                     if (selection.selectedModule.code == 3001) {
                         this.las++
                         this.advanced++
-                    } else if (selection.selectedModule.code == 2007) {
+                    } 
+                    else if (selection.selectedModule.code == 2007) {
                         this.las++
-                    } else if (selection.selectedModule.code > 3000) {
-                        this.advanced++
-                    } else if (selection.selectedModule.code < 2000) {
-                        this.introduction++
-                    } else {
-                        // nothing
-                    }
-                } else if (selection.selectedModule.subject == "PRA") {
+                    } 
+                }
+                else if (selection.selectedModule.code > 3000 && selection.selectedModule.subject !== 'PRA') {
+                    this.advanced++
+                } 
+                else if (selection.selectedModule.code < 2000 && selection.selectedModule.subject !== 'PRA') {
+                    this.introduction++
+                }
+                else if (selection.selectedModule.subject == "PRA") {
                     if (selection.selectedModule.code > 3000) {
                         this.advancedPractical++
                     } else if (selection.selectedModule.code < 2000) {
                         this.introductionPractical++
-                    } else {
-                        // nothing
-                    }
-                } else {
-                    if (selection.selectedModule.code > 3000) {
-                        this.advanced++
-                    } else if (selection.selectedModule.code < 2000) {
-                        this.introduction++
                     } else {
                         // nothing
                     }
@@ -134,10 +218,30 @@ export default {
                 .from('selection_duplicate')
                 .delete()
                 .eq('id', id)
-            this.sel = selection
-            this.fetchSelected()
+            this.sel = this.sel.filter(s => s.id !== id).map(module => ({...module}))
+            this.advanced = 0,
+            this.advancedPractical = 0,
+            this.introduction = 0,
+            this.introductionPractical = 0,
+            this.math = 0,
+            this.las = 0
+            this.tracker()
+            // no need here to call the API, modification to the local copy suffices
+            // this.sel = selection
+            // this.fetchSelected()
         },
     }
 
 }
 </script>
+
+<style scoped>
+    ::-webkit-scrollbar{
+      width: 10px;
+    }
+    ::-webkit-scrollbar-thumb{
+      border-radius: 5px;
+      background-color: #9E9E9E;
+      
+    }
+</style>

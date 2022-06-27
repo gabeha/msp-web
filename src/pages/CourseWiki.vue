@@ -48,11 +48,31 @@ export default {
         let { data: modules, error } = await supabase
           .from('modules')
           .select()
-          // .eq('period', '4')
+        
         this.modules = modules
-        // console.log(this.modules)
-        // console.log(uniq)
         this.sortCourses()
+      },
+      removeDuplicates() {
+          var moduleNames = []
+          this.modules.forEach(module => 
+          {moduleNames.push(module.subject + module.code)}
+          )
+          // console.log(moduleNames.length)
+          moduleNames = moduleNames.filter((item, index) => moduleNames.indexOf(item) !== index).map(m => ({...m}))
+          // console.log(moduleNames.length)
+
+          var moduleNames_copy = moduleNames
+          console.log(moduleNames_copy.length)
+
+          moduleNames_copy.forEach(dm => {
+              this.modules.splice(moduleNames.indexOf(dm),1)
+              moduleNames.splice(moduleNames.indexOf(dm),1)
+          })
+
+          // console.log(this.modules.filter(m => m.code == 1101))
+
+          // console.log(this.modules.length)
+          // return this.modules
       },
       sortCourses() {
             this.physics = this.modules.filter(module => module.subject == 'PHY')
@@ -64,7 +84,6 @@ export default {
             this.practicals = this.modules.filter(module => module.subject == 'PRA')
         },
       assignCourse(id) {
-        // console.log(id)
         this.highlightedModule = id
       }
     }

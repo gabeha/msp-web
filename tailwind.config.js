@@ -17,12 +17,13 @@ module.exports = {
     },
     extend: {
       spacing: {
-        'wiki': 'calc(100vh - 141px);',
+        'wiki': 'calc(100vh - 300px);',
         'info': 'calc(100vh - 111px);',
         'pool': '38rem;'
       },
       backgroundImage: {
-        'checking_boxes': "url('./assets/checking_boxes.svg')"
+        'checking_boxes': "url('./assets/checking_boxes.svg')",
+        'login': "url('./assets/login')"
       }
     },
   },

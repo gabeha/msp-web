@@ -1,5 +1,5 @@
 <template>
-<footer class="p-4 text-center md:text-start bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800">
+<footer class="p-4 text-center md:text-start  rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800">
     <span class="text-sm text-gray-500 dark:text-gray-400">
         © 2022 MSP Course Builder All Rights Reserved.
     </span>
