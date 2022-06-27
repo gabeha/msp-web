@@ -61,7 +61,7 @@
                                 {{ s.period }}
                             </td>
                             <td class="px-6 py-4 text-right w-1/4">
-                                <button @click="removeChoice(s.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</button>
+                                <button @click="removeChoice(s.id)" class="font-medium text-sky-600 dark:text-sky-500 hover:underline">Delete</button>
                             </td>
                         </tr>
                     </tbody>

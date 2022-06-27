@@ -18,7 +18,7 @@ module.exports = {
     extend: {
       spacing: {
         'wiki': 'calc(100vh - 300px);',
-        'info': 'calc(100vh - 111px);',
+        'info': 'calc(100vh - 170px);',
         'pool': '38rem;'
       },
       backgroundImage: {
