@@ -23,7 +23,7 @@ module.exports = {
       },
       backgroundImage: {
         'checking_boxes': "url('./assets/checking_boxes.svg')",
-        'login': "url('./assets/login')"
+        'login': "url('./assets/login.svg')"
       }
     },
   },
