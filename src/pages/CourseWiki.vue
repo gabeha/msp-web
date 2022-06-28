@@ -70,7 +70,25 @@ export default {
         // console.log(uniq)
         this.sortCourses()
       },
+
+      changeDupModule(){
+    let IDX = []
+    for(let j = 0; j < this.modules.length; j++){
+      for(let i = j+1; i < this.modules.length; i++){
+        if (this.modules[j].code == this.modules[i].code && this.modules[j].subject == this.modules[i].subject){
+          IDX.push(j)
+        }
+      }
+    }
+    for (let i = IDX.length-1; i>=0; i--){
+      console.log(this.modules[IDX[i]])
+      this.modules.splice(IDX[i],1)
+    }
+    console.log(this.modules)
+      },
+      
       sortCourses() {
+            this.changeDupModule()
             this.physics = this.modules.filter(module => module.subject == 'PHY').sort((a, b) => parseFloat(a.code) - parseFloat(b.code))
             this.maths = this.modules.filter(module => module.subject == 'MAT').sort((a, b) => parseFloat(a.code) - parseFloat(b.code))
             this.biology = this.modules.filter(module => module.subject == 'BIO').sort((a, b) => parseFloat(a.code) - parseFloat(b.code))
@@ -78,6 +96,7 @@ export default {
             this.chemistry = this.modules.filter(module => module.subject == 'CHE').sort((a, b) => parseFloat(a.code) - parseFloat(b.code))
             this.interdisciplinary = this.modules.filter(module => module.subject == 'INT').sort((a, b) => parseFloat(a.code) - parseFloat(b.code))
             this.practicals = this.modules.filter(module => module.subject == 'PRA').sort((a, b) => parseFloat(a.code) - parseFloat(b.code))
+            
       },
       assignCourse(id) {
         // console.log(id)
@@ -89,27 +108,15 @@ export default {
       },
 
       watchResize() {
-        window.addEventListener('resize', () => {
-            if(window.innerWidth <= 960) {
-              this.mobile_view = true;
-            }
-            else {
-              this.mobile_view = false;
-            }
+        window.addEventListener('resize', () => { 
+            this.mobile_view = window.innerWidth <= 960 || document.documentElement.clientWidth <= 960;
           })
           console.log(this.mobile_view)
-          
       },
       getWidth() {
-        if(window.innerWidth || document.documentElement.clientWidth <= 960) {
-              this.mobile_view = true;
-            }
-            else {
-              this.mobile_view = false;
-            }
+        this.mobile_view = window.innerWidth <= 960 || document.documentElement.clientWidth <= 960
             console.log(this.mobile_view)
-            console.log(this.mobile_view)
-      }
+      },
       
     },
 }

@@ -84,9 +84,7 @@ export default {
       return courses.filter(function(course) {
         let regex = new RegExp(`^${app.searchTerm}`, 'gi');
         console.log(course)
-        return course.description.title.match(regex)
-        || course.subject.match(regex) 
-        // || course.code.match(regex) 
+        return course.description.title.match(regex) || course.subject.match(regex)  
         
         ;
         
@@ -95,9 +93,15 @@ export default {
      
  
 },
-
-
 }
-      
-    
 </script>
+<style scoped>
+    ::-webkit-scrollbar{
+      width: 10px;
+    }
+    ::-webkit-scrollbar-thumb{
+      border-radius: 5px;
+      background-color: #9E9E9E;
+      
+    }
+  </style>
