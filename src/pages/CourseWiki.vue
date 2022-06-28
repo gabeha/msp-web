@@ -108,12 +108,15 @@ export default {
       toggleSideBar(){
         this.sideBarShow = !this.sideBarShow
       },
-
-      watchResize() {
+     watchResize() {
         window.addEventListener('resize', () => { 
-            this.mobile_view = window.innerWidth <= 960 || document.documentElement.clientWidth <= 960;
+            this.mobile_view = window.innerWidth <= 960  || document.documentElement.clientWidth <= 960;
           })
           console.log(this.mobile_view)
+      },
+      getWidth() {
+        this.mobile_view = window.innerWidth <= 960  || document.documentElement.clientWidth <= 960
+            console.log(this.mobile_view)
       },
       
     },
