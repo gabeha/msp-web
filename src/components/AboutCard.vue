@@ -1,15 +1,19 @@
 <template>
-<div :class="hov" class="flex flex-col items-center max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100">
-    <a href="#">
-        <img class="flex  rounded-t-lg" src="../assets/profiles/profile-4.jpg" alt="" />
-    </a>
+<div :class="hov" class="flex flex-col items-center max-w-sm bg-white rounded-lg hover:border-amber-500   m-5 bg-opacity-0">
+    
+        <img class="flex rounded-full" :src="image" alt="" />
+    
     <div class="text-center p-5">
 
-        <a href="#">
+        <audio id="sound1" src="src\assets\akiyakelly.mp4" preload="auto"></audio>
+        <button @click="$emit('kelly-wolters')" href="">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{person}}</h5>
+        </button>
+
+        <a target="_blank" :href="link">
+        <h3 :class="hide" class="my-2 text-gray-500">{{title}}</h3>
         </a>
 
-        <h3 :class="hide" class="my-2 text-gray-500">{{title}}</h3>
 
         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{description}}</p>
         <a href="#" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -30,8 +34,11 @@ export default{
         description:String,
         hov:String,
         hide:String,
+        image:String,
+        link:String,
+        
+    },
 
-    }
 }
 
 </script>
@@ -66,4 +73,6 @@ export default{
       50%{background-position:100% 19%}
       100%{background-position:0% 82%}
   }
+
+
 </style>
