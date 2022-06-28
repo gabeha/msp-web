@@ -108,6 +108,7 @@ export default {
               this.mobile_view = false;
             }
             console.log(this.mobile_view)
+            console.log(this.mobile_view)
       }
       
     },
