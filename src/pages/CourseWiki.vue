@@ -16,7 +16,7 @@
     :interdisciplinary="interdisciplinary"
     :practicals="practicals"
     ></SideBar>
-  </Transition>
+    </Transition>
     <!-- <h1>hi</h1> -->
     <CourseDisplay
     :modules="modules" 
@@ -71,14 +71,14 @@ export default {
         this.sortCourses()
       },
       sortCourses() {
-            this.physics = this.modules.filter(module => module.subject == 'PHY')
-            this.maths = this.modules.filter(module => module.subject == 'MAT')
-            this.biology = this.modules.filter(module => module.subject == 'BIO')
-            this.neuroscience = this.modules.filter(module => module.subject == 'NEU')
-            this.chemistry = this.modules.filter(module => module.subject == 'CHE')
-            this.interdisciplinary = this.modules.filter(module => module.subject == 'INT')
-            this.practicals = this.modules.filter(module => module.subject == 'PRA')
-        },
+            this.physics = this.modules.filter(module => module.subject == 'PHY').sort((a, b) => parseFloat(a.code) - parseFloat(b.code))
+            this.maths = this.modules.filter(module => module.subject == 'MAT').sort((a, b) => parseFloat(a.code) - parseFloat(b.code))
+            this.biology = this.modules.filter(module => module.subject == 'BIO').sort((a, b) => parseFloat(a.code) - parseFloat(b.code))
+            this.neuroscience = this.modules.filter(module => module.subject == 'NEU').sort((a, b) => parseFloat(a.code) - parseFloat(b.code))
+            this.chemistry = this.modules.filter(module => module.subject == 'CHE').sort((a, b) => parseFloat(a.code) - parseFloat(b.code))
+            this.interdisciplinary = this.modules.filter(module => module.subject == 'INT').sort((a, b) => parseFloat(a.code) - parseFloat(b.code))
+            this.practicals = this.modules.filter(module => module.subject == 'PRA').sort((a, b) => parseFloat(a.code) - parseFloat(b.code))
+      },
       assignCourse(id) {
         // console.log(id)
         this.highlightedModule = id
@@ -114,7 +114,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .slide-fade-enter-active {
   transition: all 0.3s cubic-bezier(0.5, 1, 1, 0.8);
 }
@@ -126,6 +126,6 @@ export default {
 .slide-fade-enter-from,
 .slide-fade-leave-to {
   transform: translateX(-20px);
-  /* opacity: 0; */
+  opacity: 0;
 }
 </style>

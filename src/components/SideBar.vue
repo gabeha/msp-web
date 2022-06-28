@@ -1,6 +1,6 @@
 <template>
 
-<aside class="lg:ml-[10%] bg-white left-0 fixed h-[80%] lg:w-[22%] sm:w-[40%] xs:w-[70%] -z-0 px-3 pb-4 lg:mt-1" aria-label="Sidebar">
+<aside class="lg:ml-[10%] bg-white left-0 fixed lg:h-[84%] h-full lg:w-[22%] sm:w-[40%] xs:w-[70%] -z-0 px-3 pb-4 lg:mt-1" aria-label="Sidebar">
    <div class=" overflow-y-auto h-full mx-0 py-6 bg-white dark:bg-gray-800 pr-4 ">
       <ul class="space-y-2 ">
          <li>

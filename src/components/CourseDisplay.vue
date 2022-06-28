@@ -6,9 +6,9 @@
                 <h1 class="font-medium leading-tight text-4xl md:text-titleSize sm:text-4xl mt-2 mb-2 text-gray-600">{{p.description.title}}</h1>
                 <h4 class="font-thin leading-tight text-2xl sm:text-3xl mt-0 mb-4 text-gray-600">{{p.subject}}{{p.code}}</h4>
             </div>
-            <div class="grid grid-col-1 grid-rows-2 xl:grid-cols-2 xl:grid-rows-1 gap-4 mx-4 xl:h-[600px] ">
+            <div class="grid grid-col-1 grid-rows-2 xl:grid-cols-2 xl:grid-rows-1 gap-4 mx-4 xl:h-[600px] mb-[69px]">
                 <!-- info part -->
-                <div class=" xl:h-full bg-white rounded-lg shadow-md mx-auto flex flex-col px-7 py-3 xl:overflow-y-auto row-start-1 row-end-3 xl:row-end-1 ">
+                <div class=" xl:h-full bg-white rounded-lg shadow-xl mx-auto flex flex-col px-7 py-3 xl:overflow-y-auto row-start-1 row-end-3 xl:row-end-1 ">
                     <h3 class="self-center font-medium leading-tight text-2xl sm:text-3xl mt-0 mb-2 text-amber-600">Course Information</h3>
                     <h5 class="font-medium leading-tight text-lg sm:text-xl mt-0 mb-2 text-amber-600">Course Coordinator(s)</h5>
                      <ul class="list-disc">
@@ -60,7 +60,7 @@
                     </ul>
                 </div>
                 <!-- description part -->
-                <div class="overflow-y-auto xl:h-full bg-white rounded-lg shadow-md mx-auto flex flex-col px-7 py-2 ">
+                <div class="overflow-y-auto xl:h-full bg-white rounded-lg shadow-xl mx-auto flex flex-col px-7 py-2 ">
                     <h3 class="self-center font-medium leading-tight text-2xl sm:text-3xl mt-0 mb-2 text-amber-600">Course Description</h3>
                     <p class="font-normal  text-justify text-sm sm:text-base">{{p.description.description}}</p>
                 </div>
