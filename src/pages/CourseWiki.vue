@@ -65,10 +65,8 @@ export default {
         let { data: modules, error } = await supabase
           .from('modules')
           .select()
-          // .eq('period', '4')
+        
         this.modules = modules
-        // console.log(this.modules)
-        // console.log(uniq)
         this.sortCourses()
       },
 
@@ -87,7 +85,6 @@ export default {
     }
     console.log(this.modules)
       },
-      
       sortCourses() {
             this.changeDupModule()
             this.physics = this.modules.filter(module => module.subject == 'PHY').sort((a, b) => parseFloat(a.code) - parseFloat(b.code))
@@ -100,7 +97,6 @@ export default {
             
       },
       assignCourse(id) {
-        // console.log(id)
         this.highlightedModule = id
         this.toggleSideBar()
       },

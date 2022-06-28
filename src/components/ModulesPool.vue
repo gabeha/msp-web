@@ -1,5 +1,5 @@
 <template>
-    <div class="select-none py-4 m-4 rounded-xl border border-gray-600 shadow-xl min-h-96 text-center">
+    <div class="select-none py-4 m-4 rounded-xl border border-gray-600 shadow-xl min-h-96 text-center bg-white bg-opacity-20">
         <div class="flex justify-around items-center">
             <font-awesome-icon @click="previousPeriod" class="text-2xl py-3 px-4 rounded-xl border hover:bg-gray-200" icon="fa-solid fa-chevron-left" />
             <div class="flex flex-col">
