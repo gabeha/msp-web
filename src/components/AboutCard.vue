@@ -1,7 +1,7 @@
 <template>
 <div :class="hov" class="flex flex-col items-center max-w-sm bg-white rounded-lg hover:border-amber-500   m-5 bg-opacity-0">
     
-        <img class="flex rounded-full" :src=image alt="" />
+        <img class="flex rounded-full" :src="'src\\assets\\profiles\\profile-'+image+'.jpg'" alt="" />
     
     <div class="text-center p-5">
 
@@ -27,7 +27,7 @@
 <script>
 
 export default{
-    name:'aboutcard',
+    name:'AboutCard',
     props:{
         person:String,
         title:String,
