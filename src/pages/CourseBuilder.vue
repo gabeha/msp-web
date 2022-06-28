@@ -82,8 +82,8 @@ export default {
         }
     },
     mounted() {
-      this.fetchAllModules(),
-      this.fetchSelected()
+      this.fetchSelected(),
+      this.fetchAllModules()
     },
     setup() {
         const { user } = useAuthUser()
