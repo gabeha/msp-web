@@ -8,6 +8,7 @@
 
 <script>
 
+
 export default {
     methods: {},
     components: {
@@ -17,7 +18,8 @@ export default {
       return {
 
       }
-    },
+  },
+    
 }
 </script>
 

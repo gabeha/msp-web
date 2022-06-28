@@ -1,4 +1,5 @@
 <template>
+
 <div class="h-[60px] lg:h-[73px] w-full bg-white ">
 <nav class="z-50 fixed top-0 left-0 w-full bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 border-b">
   <div class="sm:container flex flex-wrap justify-between items-center mx-auto bg-white">
@@ -31,7 +32,13 @@
       <li>
         <router-link @click="toggleHidden()" to="/dashboard" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Dashboard</router-link>
       </li>
-      <li v-if="!user">
+      <li v-if="isadmin()">
+          <router-link @click="toggleHidden()" to="/admin" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Admin Page</router-link>
+
+      </li>
+      <li class="hidden" v-else>
+      </li>
+     <li v-if="!user">
         <router-link to="/login" class="block mx-auto my-2">
             <Button @btn-click="toggleHidden()" name="Login"></Button>
         </router-link>
@@ -41,7 +48,7 @@
           <Button @btn-click="toggleHidden()" name="Logout"></Button>
         </router-link>
       </li>
-    </ul>
+      </ul>
   </div>
 </div>
 </nav>
@@ -49,32 +56,50 @@
 </template>
 
 <script>
-
 import router from '../router.js'
-import  useAuthUser from '../composables/UseAuthUser.js';
-
+import useAuthUser from '../composables/UseAuthUser.js';
 export default {
-    name: 'NavBar',
-    components: {
-        
-    },
+  name: 'Navbar',
+  components: {
+  },
     data() {
         return {
-
+              admin: [
+                'spm.aarts@student.maastrichtuniversity.nl',
+                'anton.schmidt@student.maastrichtuniversity.nl',
+                'e.zavialova@student.maastrichtuniversity.nl',
+                'zoe.ducarne@hotmail.com',
+                'g.hauss@student.maastrichtuniversity.nl',
+                'hoken0903@gmail.com',
+                'hieronymus.jens@yahoo.com',
+                'kellywolters@hotmail.nl'
+            ],
         }
     },
-    setup() {
-        const { user } = useAuthUser()
-        return {
-            user
-        }
-    },
-    methods: {
-        toggleHidden() {
-            document.getElementById('mobile-menu-4').classList.toggle('hidden');
-        },    
-
-        
+  setup() {
+    const { user } = useAuthUser()
+    return {
+      user
     }
+  },
+  mounted() {
+  },
+  computed() {
+
+  },
+  methods: {
+    toggleHidden() {
+            document.getElementById('mobile-menu-4').classList.toggle('hidden');
+      },  
+    isadmin() {
+      if (this.user) {
+        return this.admin.includes(this.user.email)
+      } else {
+        return this.user
+      }
+    
+    },
+  }
 }
 </script>
+          
