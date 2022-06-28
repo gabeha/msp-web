@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     minHeight: {
       'wiki': 'calc(100vh - 141px);',
-      'period': '13rem',
+      'period': '12.5rem',
       'card': '150px'
     },
     maxHeight: {

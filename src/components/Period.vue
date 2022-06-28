@@ -6,7 +6,7 @@
                     <div class="rounded-full border-2 flex justify-between items-center m-1 mx-auto px-2 py-1 space-x-2 w-full"
                     :class="c.selectedModule.hasprerec ? '' : ''">
                             
-                            <button class="text-left font-medium text-xs lg:text-base"
+                            <button class="text-left font-medium text-xs 2xl:text-base"
                             :class="c.selectedModule.subject == 'PHY' ? 'text-sky-500' 
                             :c.selectedModule.subject == 'MAT' ? 'text-red-400'
                             :c.selectedModule.subject == 'BIO' ? 'text-green-500'
