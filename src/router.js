@@ -8,6 +8,7 @@ import EmailConfirmation from './pages/EmailConfirmation.vue'
 import LoginPage from './pages/LoginPage.vue'
 import Dashboard from './pages/Dashboard.vue'
 import ForgotPassword from './pages/ForgotPassword.vue'
+import AdminPage from './pages/AdminPage.vue'
 
 const routes = [
   {
@@ -61,6 +62,14 @@ const routes = [
       path: "/forgotpassword",
       name: "ForgotPassword",
       component: ForgotPassword
+    },
+    {
+      path: "/admin",
+      name: "Admin",
+      meta: {
+        requiresAuth: true
+      },
+      component: AdminPage
     }
   ]
 const router = createRouter({
