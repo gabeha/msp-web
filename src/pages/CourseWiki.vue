@@ -56,8 +56,9 @@ export default {
       this.fetchAllModules()
     },
     mounted() {
-      this.watchResize()
       this.getWidth()
+      this.watchResize()
+
     },
     methods: {
       async fetchAllModules() {
@@ -101,6 +102,7 @@ export default {
       assignCourse(id) {
         // console.log(id)
         this.highlightedModule = id
+        this.toggleSideBar()
       },
 
       toggleSideBar(){
@@ -113,10 +115,6 @@ export default {
           })
           console.log(this.mobile_view)
       },
-      getWidth() {
-        this.mobile_view = window.innerWidth <= 960 || document.documentElement.clientWidth <= 960
-            console.log(this.mobile_view)
-      },
       
     },
 }
@@ -124,16 +122,16 @@ export default {
 
 <style scoped>
 .slide-fade-enter-active {
-  transition: all 0.3s cubic-bezier(0.5, 1, 1, 0.8);
+  transition: all 0.5s;
 }
 
 .slide-fade-leave-active {
-  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.5s;
 }
 
 .slide-fade-enter-from,
 .slide-fade-leave-to {
-  transform: translateX(-20px);
-  opacity: 0;
+  transform: translateX(-500px);
+  /* opacity: 0; */
 }
 </style>
