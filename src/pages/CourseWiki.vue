@@ -83,6 +83,7 @@ export default {
       assignCourse(id) {
         // console.log(id)
         this.highlightedModule = id
+        this.toggleSideBar()
       },
 
       toggleSideBar(){
@@ -102,7 +103,7 @@ export default {
           
       },
       getWidth() {
-        if(window.innerWidth || document.documentElement.clientWidth <= 960) {
+        if(window.innerWidth <= 960 || document.documentElement.clientWidth <= 960) {
               this.mobile_view = true;
             }
             else {
@@ -118,16 +119,16 @@ export default {
 
 <style scoped>
 .slide-fade-enter-active {
-  transition: all 0.3s cubic-bezier(0.5, 1, 1, 0.8);
+  transition: all 0.5s;
 }
 
 .slide-fade-leave-active {
-  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.5s;
 }
 
 .slide-fade-enter-from,
 .slide-fade-leave-to {
-  transform: translateX(-20px);
-  opacity: 0;
+  transform: translateX(-500px);
+  /* opacity: 0; */
 }
 </style>

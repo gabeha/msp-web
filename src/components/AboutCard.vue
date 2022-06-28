@@ -1,7 +1,7 @@
 <template>
 <div :class="hov" class="flex flex-col items-center max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100">
     <a href="#">
-        <img class="flex  rounded-t-lg" src="' src\assets\profiles\profile-1.jpg" alt="" />
+        <img class="flex  rounded-t-lg" src="src\assets\profiles\profile-1.jpg" alt="" />
     </a>
     <div class="text-center p-5">
 
