@@ -71,7 +71,16 @@
         </div>
         <div class="flex flex-col justify-between bg-white rounded-lg shadow-lg p-4">
             <h3 class="font-medium leading-tight text-3xl mt-0 mb-4 text-sky-600">Your Progress</h3>
-            <div class="flex flex-col border-b-2 border-b-gray-400 pb-6">
+             <div class="my-4 border-b-2  border-b-gray-400 pb-6"> 
+                    <div class="flex justify-between mb-1">
+                    <span class="text-base font-medium text-green-500 dark:text-white">Credits</span>
+                    <span class="text-sm font-medium text-green-500 dark:text-white">{{this.credits}}/120 <span class="font-medium text-gray-600">(min. 120)</span></span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                    <div class="bg-green-400 h-2.5 rounded-full max-w-full" :style="{width: (this.credits/120)*100 +'%'}"></div>
+                    </div>
+                </div>
+            <div class="mt-4 flex flex-col border-b-2 border-b-gray-400 pb-6">
                 <h5 class="font-medium leading-tight text-xl mt-0 mb-4 text-sky-600">Minimum Requirements</h5>
                 <div class="my-4">    
                     <div class="flex justify-between mb-1">
@@ -109,6 +118,7 @@
                     <div class="bg-gray-400 h-2.5 rounded-full max-w-full" :style="{width: (this.advancedPractical/2)*100 +'%'}"></div>
                     </div>
                 </div>
+               
             </div>
             <div class="flex flex-col mt-4">
                 <h5 class="font-medium leading-tight text-xl mt-0 mb-4 text-sky-600">Maximum Limits</h5>
@@ -151,7 +161,7 @@ export default {
 },
     data() {
         return {
-            credits: 60,
+            credits: 0,
             sel: [],
             advanced: 0,
             advancedPractical: 0,
@@ -159,6 +169,7 @@ export default {
             introductionPractical: 0,
             math: 0,
             las: 0
+
 
         }
     },
@@ -185,6 +196,15 @@ export default {
         },
         tracker() {
             this.sel.forEach(selection => {
+                if(selection.selectedModule.subject == "PRA"){
+                    this.credits +=2.5
+                }
+                else if(selection.selectedModule.subject !== "PRA"){
+                    this.credits +=5
+                }
+
+
+
                 if (selection.selectedModule.subject == "MAT") {
                     this.math++
                     if (selection.selectedModule.code < 2000) {
@@ -226,13 +246,14 @@ export default {
                 .delete()
                 .eq('id', id)
             if (error == null) {
-                this.sel = this.sel.filter(s => s.id !== id).map(module => ({...module}))
+                this.sel = this.sel.filter(s => s.id !== id).map(module => ({...module})).map(module => ({...module}))
                 this.advanced = 0,
                 this.advancedPractical = 0,
                 this.introduction = 0,
                 this.introductionPractical = 0,
                 this.math = 0,
-                this.las = 0
+                this.las = 0,
+                this.credits = 0
                 this.tracker()
             }
             else {
