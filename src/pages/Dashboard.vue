@@ -31,9 +31,9 @@
                             <th scope="col" class="text-base px-6 py-3">
                                 Period
                             </th>
-                            <!-- <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3">
                                 Edit
-                            </th> -->
+                            </th>
                         </tr>
                     </thead>
                     <tbody v-for="(s, index) in sel" :key="index" class="overflow-y-auto w-full">
@@ -60,9 +60,9 @@
                             <td class="font-medium px-6 py-4 w-1/4">
                                 {{ s.period }}
                             </td>
-                            <!-- <td class="px-6 py-4 text-right w-1/4">
+                            <td class="px-6 py-4 text-right w-1/4">
                                 <button @click="removeChoice(s.id)" class="font-medium text-sky-600 dark:text-sky-500 hover:underline">Delete</button>
-                            </td> -->
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -71,7 +71,7 @@
         </div>
         <div class="flex flex-col justify-between bg-white rounded-lg shadow-lg p-4">
             <h3 class="font-medium leading-tight text-3xl mt-0 mb-4 text-sky-600">Your Progress</h3>
-            <div class="flex flex-col border-b-2 border-b-gray-400">
+            <div class="flex flex-col border-b-2 border-b-gray-400 pb-6">
                 <h5 class="font-medium leading-tight text-xl mt-0 mb-4 text-sky-600">Minimum Requirements</h5>
                 <div class="my-4">    
                     <div class="flex justify-between mb-1">
