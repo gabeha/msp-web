@@ -74,8 +74,17 @@
              <div class="my-4 border-b-2  border-b-gray-400 pb-10"> 
                     <div class="flex justify-between mb-1">
                     <span class="text-base font-medium text-green-500 dark:text-white">Credits</span>
-                    <span class="text-sm font-medium text-green-500 dark:text-white">{{this.credits}}/120 <span class="font-medium text-gray-600">(min. 120)</span></span>
+                    <div class="flex">
+                        <div class="flex mb-4 text-sm w-full justify-end max-w-max   md:mx-0 group">
+                            <svg class="flex-shrink-0  m-1 w-5 h-5 float-right mr-2 text-gray-600 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                            <p class="hidden group-hover:block my-auto font-medium bg-gray-300 text-gray-600 p-1 absolute rounded-md mr-2">excl. projects and BTR</p>
+                        </div>
+                        <span class="text-sm font-medium m-1 text-green-500 dark:text-white">{{this.credits}}/120 <span class="font-medium text-gray-600">(min. 120)</span>
+                        </span>
                     </div>
+
+                    </div>
+                    
                     <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
                     <div class="bg-green-400 h-2.5 rounded-full max-w-full" :style="{width: (this.credits/120)*100 +'%'}"></div>
                     </div>
