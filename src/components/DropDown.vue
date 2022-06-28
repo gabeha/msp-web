@@ -1,6 +1,6 @@
 <template>
 <div>
-    <button @click="toggleHidden()" type="button" class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group bg-gray-100 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
+    <button @click="toggleHidden()" type="button" class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group bg-white hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
             <font-awesome-icon :icon="'fa-solid fa-'+icon" />
             <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>{{title}}</span>
             <font-awesome-icon :id="'icon-up-'+title" icon="fa-solid fa-chevron-down" />
