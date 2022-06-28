@@ -5,7 +5,7 @@
     </span>
     <ul class="flex flex-wrap items-center justify-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
         <li>
-            <router-link to="/" class="mr-4 hover:underline md:mr-6">Privacy Policy</router-link>
+            <router-link to="/admin" class="mr-4 hover:underline md:mr-6">Privacy Policy</router-link>
         </li>
         <li>
             <router-link to="/" class="mr-4 hover:underline md:mr-6">Licensing</router-link>

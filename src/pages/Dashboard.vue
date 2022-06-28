@@ -71,7 +71,7 @@
         </div>
         <div class="flex flex-col justify-between bg-white rounded-lg shadow-lg p-4">
             <h3 class="font-medium leading-tight text-3xl mt-0 mb-4 text-sky-600">Your Progress</h3>
-             <div class="my-4 border-b-2  border-b-gray-400 pb-6"> 
+             <div class="my-4 border-b-2  border-b-gray-400 pb-10"> 
                     <div class="flex justify-between mb-1">
                     <span class="text-base font-medium text-green-500 dark:text-white">Credits</span>
                     <span class="text-sm font-medium text-green-500 dark:text-white">{{this.credits}}/120 <span class="font-medium text-gray-600">(min. 120)</span></span>
@@ -80,7 +80,7 @@
                     <div class="bg-green-400 h-2.5 rounded-full max-w-full" :style="{width: (this.credits/120)*100 +'%'}"></div>
                     </div>
                 </div>
-            <div class="mt-4 flex flex-col border-b-2 border-b-gray-400 pb-6">
+            <div class=" flex flex-col border-b-2 border-b-gray-400 pb-6">
                 <h5 class="font-medium leading-tight text-xl mt-0 mb-4 text-sky-600">Minimum Requirements</h5>
                 <div class="my-4">    
                     <div class="flex justify-between mb-1">
