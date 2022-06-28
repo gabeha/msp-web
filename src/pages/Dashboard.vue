@@ -22,18 +22,18 @@
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400 mt-0 w-full">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="text-base px-6 py-3">
                                 Module
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="text-base px-6 py-3">
                                 Semester
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="text-base px-6 py-3">
                                 Period
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <!-- <th scope="col" class="px-6 py-3">
                                 Edit
-                            </th>
+                            </th> -->
                         </tr>
                     </thead>
                     <tbody v-for="(s, index) in sel" :key="index" class="overflow-y-auto w-full">
@@ -60,22 +60,23 @@
                             <td class="font-medium px-6 py-4 w-1/4">
                                 {{ s.period }}
                             </td>
-                            <td class="px-6 py-4 text-right w-1/4">
+                            <!-- <td class="px-6 py-4 text-right w-1/4">
                                 <button @click="removeChoice(s.id)" class="font-medium text-sky-600 dark:text-sky-500 hover:underline">Delete</button>
-                            </td>
+                            </td> -->
                         </tr>
                     </tbody>
                 </table>
             </div>
 
         </div>
-        <div>
+        <div class="flex flex-col justify-between bg-white rounded-lg shadow-lg p-4">
             <h3 class="font-medium leading-tight text-3xl mt-0 mb-4 text-sky-600">Your Progress</h3>
-            <div class="flex flex-col">
+            <div class="flex flex-col border-b-2 border-b-gray-400">
+                <h5 class="font-medium leading-tight text-xl mt-0 mb-4 text-sky-600">Minimum Requirements</h5>
                 <div class="my-4">    
                     <div class="flex justify-between mb-1">
                     <span class="text-base font-medium text-red-500 dark:text-white">Maths Courses</span>
-                    <span class="text-sm font-medium text-red-500 dark:text-white">{{(this.math/1)*100 > 100 ? 100 : (this.math/1)*100}}%</span>
+                    <span class="text-sm font-medium text-red-500 dark:text-white">{{(this.math/1)*100 > 100 ? 100 : (this.math/1)*100}}% <span class="font-medium text-gray-600">(min. 1)</span></span>
                     </div>
                     <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
                     <div class="bg-red-400 h-2.5 rounded-full max-w-full" :style="{width: (this.math/1)*100 +'%'}"></div>
@@ -84,7 +85,7 @@
                 <div class="my-4">    
                     <div class="flex justify-between mb-1">
                     <span class="text-base font-medium text-indigo-500 dark:text-white">Liberal Arts & Science Courses</span>
-                    <span class="text-sm font-medium text-indigo-500 dark:text-white">{{(this.las/1)*100 > 100 ? 100 : (this.las/1)*100}}%</span>
+                    <span class="text-sm font-medium text-indigo-500 dark:text-white">{{(this.las/1)*100 > 100 ? 100 : (this.las/1)*100}}% <span class="font-medium text-gray-600">(min. 1)</span></span>
                     </div>
                     <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
                     <div class="bg-indigo-400 h-2.5 rounded-full max-w-full" :style="{width: (this.las/1)*100 +'%'}"></div>
@@ -92,8 +93,29 @@
                 </div>
                 <div class="my-4">    
                     <div class="flex justify-between mb-1">
+                    <span class="text-base font-medium text-orange-500 dark:text-white">Advanced 3000 Level Courses</span>
+                    <span class="text-sm font-medium text-orange-500 dark:text-white">{{(this.advanced/4)*100 > 100 ? 100 : (this.advanced/4)*100}}% <span class="font-medium text-gray-600">(min. 4)</span></span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                    <div class="bg-orange-400 h-2.5 rounded-full max-w-full" :style="{width: (this.advanced/4)*100 +'%'}"></div>
+                    </div>
+                </div>
+                <div class="my-4">    
+                    <div class="flex justify-between mb-1">
+                    <span class="text-base font-medium text-gray-500 dark:text-white">Advanced 3000 Level Practicals</span>
+                    <span class="text-sm font-medium text-gray-500 dark:text-white">{{(this.advancedPractical/2)*100 > 100 ? 100 : (this.advancedPractical/2)*100}}% <span class="font-medium text-gray-600">(min. 2)</span></span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                    <div class="bg-gray-400 h-2.5 rounded-full max-w-full" :style="{width: (this.advancedPractical/2)*100 +'%'}"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col mt-4">
+                <h5 class="font-medium leading-tight text-xl mt-0 mb-4 text-sky-600">Maximum Limits</h5>
+                <div class="my-4">    
+                    <div class="flex justify-between mb-1">
                     <span class="text-base font-medium text-purple-500 dark:text-white">Introductory Level Courses</span>
-                    <span class="text-sm font-medium text-purple-500 dark:text-white">{{(this.introduction/4)*100 > 100 ? 100 : (this.introduction/4)*100}}%</span>
+                    <span class="text-sm font-medium text-purple-500 dark:text-white">{{(this.introduction/4)*100 > 100 ? 100 : (this.introduction/4)*100}}% <span class="font-medium text-gray-600">(max. 4)</span></span>
                     </div>
                     <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
                     <div class="bg-purple-400 h-2.5 rounded-full max-w-full" :style="{width: (this.introduction/4)*100 +'%'}"></div>
@@ -102,28 +124,10 @@
                 <div class="my-4">    
                     <div class="flex justify-between mb-1">
                     <span class="text-base font-medium text-pink-500 dark:text-white">Introductory Level Practicals</span>
-                    <span class="text-sm font-medium text-pink-500 dark:text-white">{{(this.introductionPractical/2)*100 > 100 ? 100 : (this.introductionPractical/2)*100}}%</span>
+                    <span class="text-sm font-medium text-pink-500 dark:text-white">{{(this.introductionPractical/2)*100 > 100 ? 100 : (this.introductionPractical/2)*100}}% <span class="font-medium text-gray-600">(max. 2)</span></span>
                     </div>
                     <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
                     <div class="bg-pink-400 h-2.5 rounded-full max-w-full" :style="{width: (this.introductionPractical/2)*100 +'%'}"></div>
-                    </div>
-                </div>
-                <div class="my-4">    
-                    <div class="flex justify-between mb-1">
-                    <span class="text-base font-medium text-orange-500 dark:text-white">Advanced 3000 Level Courses</span>
-                    <span class="text-sm font-medium text-orange-500 dark:text-white">{{(this.advanced/4)*100 > 100 ? 100 : (this.advanced/4)*100}}%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                    <div class="bg-orange-400 h-2.5 rounded-full max-w-full" :style="{width: (this.advanced/4)*100 +'%'}"></div>
-                    </div>
-                </div>
-                <div class="my-4">    
-                    <div class="flex justify-between mb-1">
-                    <span class="text-base font-medium text-gray-500 dark:text-white">Advanced 3000 Level Courses</span>
-                    <span class="text-sm font-medium text-gray-500 dark:text-white">{{(this.advancedPractical/2)*100 > 100 ? 100 : (this.advancedPractical/2)*100}}%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                    <div class="bg-gray-400 h-2.5 rounded-full max-w-full" :style="{width: (this.advancedPractical/2)*100 +'%'}"></div>
                     </div>
                 </div>
             </div>
@@ -194,7 +198,10 @@ export default {
                     } 
                     else if (selection.selectedModule.code == 2007) {
                         this.las++
-                    } 
+                    }
+                    else if (selection.selectedModule.code > 3000) {
+                        this.advanced++
+                    }
                 }
                 else if (selection.selectedModule.code > 3000 && selection.selectedModule.subject !== 'PRA') {
                     this.advanced++
@@ -218,15 +225,20 @@ export default {
                 .from('selection_duplicate')
                 .delete()
                 .eq('id', id)
-            console.log(selection)
-            this.sel = this.sel.filter(s => s.id !== id).map(module => ({...module}))
-            this.advanced = 0,
-            this.advancedPractical = 0,
-            this.introduction = 0,
-            this.introductionPractical = 0,
-            this.math = 0,
-            this.las = 0
-            this.tracker()
+            if (error == null) {
+                this.sel = this.sel.filter(s => s.id !== id).map(module => ({...module}))
+                this.advanced = 0,
+                this.advancedPractical = 0,
+                this.introduction = 0,
+                this.introductionPractical = 0,
+                this.math = 0,
+                this.las = 0
+                this.tracker()
+            }
+            else {
+                alert(error)
+            }
+            
             // no need here to call the API, modification to the local copy suffices
             // this.sel = selection
             // this.fetchSelected()
