@@ -56,8 +56,9 @@ export default {
       this.fetchAllModules()
     },
     mounted() {
-      this.watchResize()
       this.getWidth()
+      this.watchResize()
+
     },
     methods: {
       async fetchAllModules() {
