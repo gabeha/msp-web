@@ -5,8 +5,6 @@
             <Period @period-clicked="passOn" @module-removed="moduleRemoved" @info-clicked="passOnInfo" :periodNumber="getPeriod()" :choices="choices" :semester="semesterNumber" :current="current"></Period>
             <Period @period-clicked="passOn" @module-removed="moduleRemoved" @info-clicked="passOnInfo" :periodNumber="getPeriod()+1" :choices="choices" :semester="semesterNumber" :current="current"></Period>
         </div>
-
-
     </div>
 </template>
 
