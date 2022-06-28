@@ -1,7 +1,7 @@
 <template>
-<div class="hidden fixed left-4 bottom-4 space-y-4 lg:flex md:space-y-0 md:space-x-4 rounded-full shadow-xl">
-    <button @click="toggleHelp" class="block w-full md:w-auto text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-bold rounded-full text-lg px-5 py-2.5 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800" type="button">
-    ?
+<div class="hidden fixed left-3 bottom-4 space-y-4 lg:flex md:space-y-0 md:space-x-4 rounded-full shadow-xl">
+    <button @click="toggleHelp" class="block w-full md:w-auto text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-full text-md px-5 py-2.5 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800" type="button">
+    Help
     </button>
 </div>
 <div id="help-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden absolute z-50 w-full md:inset-0 h-modal md:h-full">
