@@ -48,7 +48,7 @@
                 <div class="flex justify-between items-start">
                     <div class="hidden md:flex flex-col justify-start shadow-xl rounded-lg p-6 mx-3 bg-white">
                         <div class="flex items-center">
-                            <img src="../assets/profiles/profile-2.jpg" alt="" class="h-20 w-20 rounded-full">
+                            <img src="../assets/profiles/profile-zoe.jpg" alt="" class="h-20 w-20 rounded-full">
                             <div>
                                 <h3 class="text-left font-medium leading-tight text-xl md:text-3xl mt-0 ml-4 text-sky-600">Zoe Ducarne</h3>
                                 <h3 class="text-left font-medium leading-tight text-lg md:text-xl mt-0 ml-4 text-gray-600">Designer</h3>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="flex flex-col justify-start shadow-xl rounded-lg p-6 mx-3 bg-white">
                         <div class="flex items-center">
-                            <img src="../assets/profiles/profile-7.jpg" alt="" class="h-20 w-20 rounded-full">
+                            <img src="../assets/profiles/profile-gabe.jpg" alt="" class="h-20 w-20 rounded-full">
                             <div>
                                 <h3 class="text-left font-medium leading-tight text-xl md:text-3xl mt-0 ml-4 text-sky-600">Gabriel Hauss</h3>
                                 <h3 class="text-left font-medium leading-tight text-lg md:text-xl mt-0 ml-4 text-gray-600">Lead Software Engineer</h3>
@@ -68,7 +68,7 @@
                     </div>
                     <div class="hidden md:flex flex-col justify-start shadow-xl rounded-lg p-6 mx-3 bg-white">
                         <div class="flex items-center">
-                            <img src="../assets/profiles/profile-4.jpg" alt="" class="h-20 w-20 rounded-full">
+                            <img src="../assets/profiles/profile-anton.jpg" alt="" class="h-20 w-20 rounded-full">
                             <div>
                                 <h3 class="text-left font-medium leading-tight text-xl md:text-3xl mt-0 ml-4 text-sky-600">Anton Schmidt</h3>
                                 <h3 class="text-left font-medium leading-tight text-lg md:text-xl mt-0 ml-4 text-gray-600">Designer</h3>
