@@ -14,7 +14,7 @@
 <!-- cards -->
 <div class=" grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-2 lg:grid-cols-3 lg:grid-rows-3 gap-8">
         <!-- Akboi -->
-        <AboutCard class ="flex" image="akiya" person="Akiya Hoken" title="Akiya.com" link="https://www.ikea.com/se/sv/p/huvudroll-kycklingkoettbullar-fryst-90486455/" description="Another of our student leaders of this project, he focused on Maths and Neuroscience at MSP. Akiya worked on the design of our website." ></AboutCard>
+        <AboutCard class ="flex" image='akiya' person="Akiya Hoken" title="Akiya.com" link="https://www.ikea.com/se/sv/p/huvudroll-kycklingkoettbullar-fryst-90486455/" description="Another of our student leaders of this project, he focused on Maths and Neuroscience at MSP. Akiya worked on the design of our website." ></AboutCard>
         <!-- GabeTheBabe -->
         <AboutCard class ="flex" image="gabe" person="Gabriel Hauss" title="The logical guy" hov="wrapper" description="One of our student leaders of this project, he focuses on Physics at MSP. Gabe worked on the logic and functionality behind our website." ></AboutCard>
         <!-- Snerts -->
