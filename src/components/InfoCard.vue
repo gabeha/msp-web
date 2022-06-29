@@ -28,9 +28,9 @@
                 </li>
             </ul>
             <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-amber-600">Recommended</h5>
-            <ul>
-                <li class="ml-6">
-                    {{infoModule.description.Recommended}}
+            <ul class="list-disc">
+                  <li class="ml-6" v-for="(o, index) in infoModule.description.recommended" :key="index">
+                    {{o}}
                 </li>
             </ul>
             <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-amber-600">Objectives</h5>
