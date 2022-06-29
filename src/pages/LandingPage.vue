@@ -26,7 +26,7 @@
                         </li>
                         <li class="mb-10 ml-7">            
                             <span class="flex absolute -left-3 md:-left-5 justify-center items-center w-6 md:w-10 h-6 md:h-10 bg-blue-200 rounded-full dark:ring-gray-900 dark:bg-blue-900">
-                                <font-awesome-icon icon="fa-solid fa-graduation-cap" class="w-3 md:w-6 h-3 md:h-6 text-blue-600 dark:text-blue-400"/>
+                                <font-awesome-icon icon="fa-solid fa-calendar-days" class="w-3 md:w-6 h-3 md:h-6 text-blue-600 dark:text-blue-400"/>
                             </span>
                             <router-link to="/builder" class="flex items-center mb-1 text-xl md:text-2xl font-semibold text-gray-900 dark:text-white hover:underline">Curriculum Planner</router-link>
                             <span class="bg-green-100 text-green-800 text-xs md:text-base font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Plan ahead</span>
@@ -34,7 +34,7 @@
                         </li>
                         <li class="mb-10 ml-7">            
                             <span class="flex absolute -left-3 md:-left-5 justify-center items-center w-6 md:w-10 h-6 md:h-10 bg-blue-200 rounded-full dark:ring-gray-900 dark:bg-blue-900">
-                                <font-awesome-icon icon="fa-solid fa-calendar-days" class="w-3 md:w-6 h-3 md:h-6 text-blue-600 dark:text-blue-400"/>
+                                <font-awesome-icon icon="fa-solid fa-info" class="w-3 md:w-6 h-3 md:h-6 text-blue-600 dark:text-blue-400"/>
                             </span>
                             <router-link to="/wiki" class="flex items-center mb-1 text-xl md:text-2xl font-semibold text-gray-900 dark:text-white hover:underline">Course Wiki</router-link>
                             <span class="bg-green-100 text-green-800 text-xs md:text-base font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Everything at a glance</span>
