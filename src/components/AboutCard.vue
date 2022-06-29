@@ -1,7 +1,7 @@
 <template>
 <div :class="hov" class="flex flex-col items-center max-w-sm bg-white rounded-lg hover:border-amber-500   m-5 bg-opacity-0">
     
-        <img class="flex rounded-full" src="../assets/profiles/profile-akiya.jpg" alt="" />
+        <img class="flex rounded-full" :src="getImageUrl(image)" alt="" />
     
     <div class="text-center p-5">
 
@@ -26,8 +26,13 @@
 
 <script>
 
-export default{
+export default {
     name:'AboutCard',
+    data() {
+        return {
+
+        }
+    },
     props:{
         person:String,
         title:String,
@@ -38,6 +43,11 @@ export default{
         link:String,
         
     },
+    methods: {
+        getImageUrl(image) {
+            return `src/assets/profiles/profile-${image}.jpg`
+        }
+    }
 
 }
 
