@@ -134,10 +134,10 @@
                 <div class="my-4">    
                     <div class="flex justify-between mb-1">
                     <span class="text-base font-medium text-purple-500 dark:text-white">Introductory Level Courses</span>
-                    <span class="text-sm font-medium text-purple-500 dark:text-white">{{(this.introduction/4)*100 > 100 ? 100 : (this.introduction/4)*100}}% <span class="font-medium text-gray-600">(max. 4)</span></span>
+                    <span class="text-sm font-medium text-purple-500 dark:text-white">{{Math.floor((this.introduction/3)*100 > 100 ? 100 : (this.introduction/3)*100)}}% <span class="font-medium text-gray-600">(max. 3)</span></span>
                     </div>
                     <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                    <div class="bg-purple-400 h-2.5 rounded-full max-w-full" :style="{width: (this.introduction/4)*100 +'%'}"></div>
+                    <div class="bg-purple-400 h-2.5 rounded-full max-w-full" :style="{width: (this.introduction/3)*100 +'%'}"></div>
                     </div>
                 </div>
                 <div class="my-4">    
@@ -230,6 +230,9 @@ export default {
                     }
                     else if (selection.selectedModule.code > 3000) {
                         this.advanced++
+                    }
+                    else if (selection.selectedModule.code < 2000) {
+                        this.introduction++
                     }
                 }
                 else if (selection.selectedModule.code > 3000 && selection.selectedModule.subject !== 'PRA') {
