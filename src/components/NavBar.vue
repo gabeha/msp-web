@@ -69,7 +69,7 @@ export default {
                 'anton.schmidt@student.maastrichtuniversity.nl',
                 'e.zavialova@student.maastrichtuniversity.nl',
                 'zoe.ducarne@hotmail.com',
-                'g.hauss@student.maastrichtuniversity.nl',
+                'gabriel.hauss@gmail.com',
                 'hoken0903@gmail.com',
                 'hieronymus.jens@yahoo.com',
                 'kellywolters@hotmail.nl'
