@@ -11,7 +11,7 @@
             <h3 class="self-center font-medium leading-tight text-2xl mt-0 mb-2 text-amber-600">Course Information</h3>
             <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-amber-600">Course Coordinator(s)</h5>
             <ul>
-                <li class="ml-6" v-for="(o, index) in infoModule.description.course_coordinator" :key="index">
+                <li class="" v-for="(o, index) in infoModule.description.course_coordinator" :key="index">
                     {{o}}
                 </li>
             </ul>
@@ -37,6 +37,18 @@
             <ul class="list-disc">
                 <li class="ml-6 text-justify" v-for="(o, index) in infoModule.description.objectives" :key="index">
                     {{o}}
+                </li>
+            </ul>
+            <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-amber-600">Assessment</h5>
+            <ul class="list-disc">
+                <li class="ml-6 text-justify" v-for="(o, index) in infoModule.description.assessment" :key="index">
+                    {{o}}
+                </li>
+            </ul>
+            <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-amber-600">Description</h5>
+            <ul>
+                <li class=" text-justify">
+                    {{infoModule.description.description}}
                 </li>
             </ul>
         </div>
