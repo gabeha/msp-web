@@ -71,6 +71,14 @@ const routes = [
       },
       component: AdminPage
     }
+    // {
+    //   path: "/admin",
+    //   name: "Admin",
+    //   meta: {
+    //     requiresAuth: true
+    //   },
+    //   component: AdminPage
+    // }
   ]
 const router = createRouter({
   history: createWebHistory(),
