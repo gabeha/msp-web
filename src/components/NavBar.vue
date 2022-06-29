@@ -3,8 +3,8 @@
 <div class="h-[60px] lg:h-[73px] w-full bg-white ">
 <nav class="z-50 fixed top-0 left-0 w-full bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 border-b">
   <div class="sm:container flex flex-wrap justify-between items-center mx-auto bg-white">
-  <router-link to="/">
-      <!-- <img src="/favicon.ico" class="mr-3 h-6 sm:h-9" alt="Logo" /> -->
+  <router-link to="/" class="flex justify-center items-center">
+      <img src="../assets/rooftop_big.png" class="mr-3 h-6 sm:h-12" alt="Logo" />
       <span class="pr-4 pl-3 text-xl sm:text-2xl font-medium whitespace-nowrap dark:text-white font-mono">MSP Course Builder</span>
   </router-link>
   <div class="flex lg:order-1">
