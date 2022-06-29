@@ -14,23 +14,23 @@
 <!-- cards -->
 <div class=" grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-2 lg:grid-cols-3 lg:grid-rows-3 gap-8">
         <!-- Akboi -->
-        <AboutCard class ="flex" image='akiya' person="Akiya Hoken" title="Akiya.com" link="https://www.ikea.com/se/sv/p/huvudroll-kycklingkoettbullar-fryst-90486455/" description="Another of our student leaders of this project, he focused on Maths and Neuroscience at MSP. Akiya worked on the design of our website." ></AboutCard>
+        <AboutCard class ="flex" image='6' person="Akiya Hoken" title="Akiya.com" link="https://www.ikea.com/se/sv/p/huvudroll-kycklingkoettbullar-fryst-90486455/" description="Another of our student leaders of this project, he focused on Maths and Neuroscience at MSP. Akiya worked on the design of our website." ></AboutCard>
         <!-- GabeTheBabe -->
-        <AboutCard class ="flex" image="gabe" person="Gabriel Hauss" title="The logical guy" hov="wrapper" description="One of our student leaders of this project, he focuses on Physics at MSP. Gabe worked on the logic and functionality behind our website." ></AboutCard>
+        <AboutCard class ="flex" image="7" person="Gabriel Hauss" title="The logical guy" hov="wrapper" description="One of our student leaders of this project, he focuses on Physics at MSP. Gabe worked on the logic and functionality behind our website." ></AboutCard>
         <!-- Snerts -->
-        <AboutCard class ="flex" image="sanne" hide="hover:opacity-0 opacity-100" person="Sanne Aarts" title="The hover lover and cookie maker" description="One of our student leaders of this project, she focuses on Physics at MSP. Sanne worked on the functionality and the design of our tool." ></AboutCard>
+        <AboutCard class ="flex" image="1" hide="hover:opacity-0 opacity-100" person="Sanne Aarts" title="The hover lover and cookie maker" description="One of our student leaders of this project, she focuses on Physics at MSP. Sanne worked on the functionality and the design of our tool." ></AboutCard>
         <!-- Ducarne -->
-        <AboutCard class ="flex" image="zoe" person="Zoé Ducarne" title="npm run build: The bio student" description="She focuses on small Biology at MSP. Zoé worked on the design of our website." ></AboutCard>
+        <AboutCard class ="flex" image="2" person="Zoé Ducarne" title="npm run build: The bio student" description="She focuses on small Biology at MSP. Zoé worked on the design of our website." ></AboutCard>
                 <!-- Jens -->
-        <AboutCard class ="flex" image="jens" person="Jens Hieronymus" title="The guy who cannot print" description="He focuses on Physics at MSP. Jens worked on the logic and functionality behind our website." ></AboutCard>
+        <AboutCard class ="flex" image="5" person="Jens Hieronymus" title="The guy who cannot print" description="He focuses on Physics at MSP. Jens worked on the logic and functionality behind our website." ></AboutCard>
         <!-- KELLY WOLTERS -->
-        <AboutCard @kelly-wolters="kelly" class ="flex" image="kelly" person="Kelly Wolters" title="< div> The one and only < /div>" description="She focuses on Astrophysics at MSP. Kelly worked on the design of our website." ></AboutCard>
+        <AboutCard @kelly-wolters="kelly" class ="flex" image="3" person="Kelly Wolters" title="< div> The one and only < /div>" description="She focuses on Astrophysics at MSP. Kelly worked on the design of our website." ></AboutCard>
         <!-- Antony -->
-        <AboutCard class ="flex" image="anton" person="Anton Schmidt" title="The hamburger menu guy" description="He focuses on Physics at MSP. Anton worked on the design of our website." ></AboutCard>
+        <AboutCard class ="flex" image="4" person="Anton Schmidt" title="The hamburger menu guy" description="He focuses on Physics at MSP. Anton worked on the design of our website." ></AboutCard>
         <!-- Zyaka -->
-        <AboutCard class ="flex" image="liza" person="Elizaveta Zavialova" title="The one who would like some fries" description="She focuses on Neuroscience and Maths at MSP. Elizaveta worked on the logic and functionality behind our website." ></AboutCard>
+        <AboutCard class ="flex" image="8" person="Elizaveta Zavialova" title="The one who would like some fries" description="She focuses on Neuroscience and Maths at MSP. Elizaveta worked on the logic and functionality behind our website." ></AboutCard>
         <!-- Mehaa -->
-        <AboutCard class ="flex" image="liza" person="Mehaa Prabakar" title="The one struggling with button sizing" description="She focuses on Maths and Biology at MSP. Mehaa worked on the design of our website." ></AboutCard>
+        <AboutCard class ="flex" image="9" person="Mehaa Prabakar" title="The one struggling with button sizing" description="She focuses on Maths and Biology at MSP. Mehaa worked on the design of our website." ></AboutCard>
 
 
     

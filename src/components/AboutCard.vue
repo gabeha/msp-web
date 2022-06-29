@@ -5,7 +5,7 @@
     
     <div class="text-center p-5">
 
-        <audio id="sound1" src="src\assets\akiyakelly.mp4" preload="auto"></audio>
+        <audio id="sound1" src="src/assets/akiyakelly.mp4" preload="auto"></audio>
         <button @click="$emit('kelly-wolters')" href="">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{person}}</h5>
         </button>
