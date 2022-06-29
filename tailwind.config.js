@@ -21,7 +21,8 @@ module.exports = {
         'wiki': 'calc(100vh - 80px);',
         'info': 'calc(100vh - 111px);',
 
-        'pool': '38rem;'
+        'pool': '38rem;',
+        'hero': '30rem;'
       },
       backgroundImage: {
         'checking_boxes': "url('./assets/checking_boxes.svg')",

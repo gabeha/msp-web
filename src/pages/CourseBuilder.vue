@@ -82,8 +82,8 @@ export default {
         }
     },
     mounted() {
-      this.fetchSelected(),
-      this.fetchAllModules()
+      this.fetchSelected()
+      // this.fetchAllModules()
     },
     setup() {
         const { user } = useAuthUser()
@@ -205,9 +205,10 @@ export default {
             .eq('id_student', this.user.id)
 
           this.choices = selection
+          this.fetchAllModules()
         } 
         else {
-          // nothing
+          this.fetchAllModules()
         }
         },
     

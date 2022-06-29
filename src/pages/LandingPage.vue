@@ -6,7 +6,7 @@
                 <p class="text-center text-lg font-medium text-gray-600 mb-6 rounded-xl shadow-xl p-4 w-4/5 mx-auto md:shadow-none">
                     Developed by MSP students for MSP students, MSP CourseBuilder is the ultimate tool to plan out your schedule for your time at the Maastricht Science Programme.
                 </p>
-                <img src="../assets/checking_boxes.svg" alt="boxes" class="p-8 mt-4 md:h-pool">
+                <img src="../assets/checking_boxes.svg" alt="boxes" class="p-8 mt-4 md:h-hero">
                 <router-link to="/builder" class="flex justify-center items-center">
                     <Button name="Start Planning" class="text-lg md:w-1/5 w-3/5"></Button>
                 </router-link>
