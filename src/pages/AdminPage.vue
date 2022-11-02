@@ -387,7 +387,7 @@ export default {
     // accesses database and stores all the modules from the table in the modules array
     async retrieveData() {
       const response = await supabase
-        .from('testjens')
+        .from('modules')
         .select()
         this.modules = response.data
         //console.log(this.modules)
