@@ -2,7 +2,7 @@
     <div class="container mx-auto min-h-wiki">
       <!-- Hide for maintenance reasons -->
       <!-- add xl:flex to revert -->
-      <div class="hidden flex-col justify-start transition-opacity min-h-period" :class="showInfo ? 'opacity-20' :fadeBackground ? 'opacity-20' : ''">
+      <div class="hidden xl:flex flex-col justify-start transition-opacity min-h-period" :class="showInfo ? 'opacity-20' :fadeBackground ? 'opacity-20' : ''">
           <div class="grid grid-cols-5 grid-rows-1 gap-6 text-center m-4">
               <Semester @period-clicked="fillPool" @module-removed="removeModule" @info-clicked="showInfoCard" :semesterNumber="1" :choices="choices" :current="[this.currentSemester, this.currentPeriod]"></Semester>
               <Semester @period-clicked="fillPool" @module-removed="removeModule" @info-clicked="showInfoCard" :semesterNumber="2" :choices="choices" :current="[this.currentSemester, this.currentPeriod]"></Semester>
@@ -32,7 +32,7 @@
       <HelpButton @help-clicked="helpClicked" class="hidden justify-self-center xl:block"></HelpButton>
       <!-- constantly shown due to maintenance -->
       <!-- add xl:hidden to revert -->
-      <div class="flex flex-col justify-center items-center h-wiki">
+      <div class="xl:hidden flex flex-col justify-center items-center h-wiki">
           <font-awesome-icon class="text-9xl opacity-50" icon="fa-solid fa-screwdriver-wrench" />
           <h5 class="mt-5 text-lg text-center font-semibold">
               Work in progress...
