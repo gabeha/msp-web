@@ -30,6 +30,11 @@
           </Transition>
       </div>
       <HelpButton @help-clicked="helpClicked" class="hidden justify-self-center xl:block"></HelpButton>
+      <div class="hidden fixed left-24 bottom-4 space-y-4 lg:flex md:space-y-0 md:space-x-4 rounded-full shadow-xl">
+        <button @click="showDisclaimer = true" class="block w-full md:w-auto text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-full text-md px-5 py-2.5 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800" type="button">
+            Disclaimer
+        </button>
+    </div>
       <!-- constantly shown due to maintenance -->
       <!-- add xl:hidden to revert -->
       <div class="xl:hidden flex flex-col justify-center items-center h-wiki">
@@ -37,15 +42,20 @@
           <h5 class="mt-5 text-lg text-center font-semibold">
               Work in progress...
               <br>
-              The database is being updated
+              We're working on building a mobile experience
           </h5>
           <h5 class="mt-5 text-lg text-center font-semibold text-sky-700">
-              Please check back soon!
+              Please use your laptop for now!
           </h5>
       </div>
     <Transition name="slide-fade">
         <InfoCard :infoModule="infoModule" @close-info-card="this.showInfo = !this.showInfo" v-show="showInfo"></InfoCard>
     </Transition>
+    <div>
+        <DisclaimerModal v-model="showDisclaimer" @confirm="confirm" @cancel="cancel">
+        <template v-slot:title>Hello, there! - DISCLAIMER</template>
+        </DisclaimerModal>
+    </div>
     
     </div>
 
@@ -84,7 +94,8 @@ export default {
             interdisciplinary: [],
             practicals: [],
             choices: [],
-            select: []
+            select: [],
+            showDisclaimer: true
         }
     },
     mounted() {
@@ -422,7 +433,15 @@ TODO: refactor! the functions used for filtering can be extracted to improve rea
             },
             helpClicked() {
               this.fadeBackground = !this.fadeBackground
-            }
+            },
+            confirm() {
+              // some code...
+              this.show = false
+            },
+            cancel(close) {
+              // some code...
+              close()
+            },
           }
   }
 
